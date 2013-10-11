@@ -127,7 +127,8 @@ void Player::mainLoop( )
   //Inicializa a cadeia de acoes
   AR->initChain( AR->chainAction, 10 );
   //Atualiza o vetor com os ultimos Nós
-  AR->atualiza_ultNo( AR->chainAction, WM->getPlayerNumber() );
+  if(WM->getPlayerNumber() > 1)
+	  AR->atualiza_ultNo( AR->chainAction, WM->getPlayerNumber() );
 
   while( bContLoop )                                 // as long as server alive
   {
