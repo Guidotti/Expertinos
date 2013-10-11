@@ -133,7 +133,8 @@ SoccerCommand Player::deMeer5(  )
   {
 	  if(WM->getPlayerNumber() == 10)
 	  {	  AR->CA_possession = 0; // Eles começam com a bola
-	  MA->InsereVetorA( 9, 0 );
+		  MA->InsereVetorA( 9, 0 );
+	  }
 	  soc = moveToPos(WM->getStrategicPosition(),
 			  PS->getPlayerWhenToTurnAngle());
 	  ACT->putCommandInQueue( soc );
@@ -160,34 +161,41 @@ SoccerCommand Player::deMeer5(  )
 
 	  if( AR->ciclo_atual > 10 )
 	  {
-		  int actNum = 1; // Numero crescente da acao, comencando por 1 na ultima
-		  AR->ultNo( AR->chainAction[p] )->CA_estadoFinal = AR->s_new;
+		  int actNum = 1; // Numero crescente da acao, comencando por 1 na ultima (primeira acao tomada na cadeia vai ter actNum maior)
+		  AR->ultNo( AR->chainAction[p] )->CA_estadoFinal = AR->s_new; // p = player - 2 (referente a posicao no vetor. Ex: Num. 2 -> p = 0 (min); Num. 11 -> p = 9 (max)
 		  if( possession != AR->CA_possession )
 		  {
-			  if( AR->CA_possession == 1 ) // A bola estava com a gente
+			  if( AR->CA_possession == 1 ) // Perdemos a bola
 			  {
 				  AR->CA_possession = 0;
-				  // Incrementar reforço negativo
-				  reforco = 27*log(actNum)-15;
-				  MA->InsereReforco( AR->ultNo( AR->chainAction[player] )->CA_acao,
-						  AR->ultNo( AR->chainAction[player] )->CA_estadoAcao, reforco);
+				  reforco = 27*log(actNum) - 15; // Colocando fora do looping é possivel conceder um reforco diferenciado a ultima acao
 
-				  Player::Atualiza_MatrizQ( reforco, AR->ultNo( AR->chainAction[player] )->CA_estadoFinal,
-						  AR->ultNo( AR->chainAction[player] )->CA_estadoAcao,
-						  AR->ultNo( AR->chainAction[player] )->CA_acao );
+				  AR->atualiza_ultNo( AR->chainAction, player );
+
+				  MA->InsereReforco( AR->ultimoNo[p]->CA_acao,
+						  AR->ultimoNo[p]->CA_estadoAcao, reforco);
+
+				  Atualiza_MatrizQ( reforco, AR->ultimoNo[p]->CA_estadoFinal,
+						  AR->ultimoNo[p]->CA_estadoAcao,
+						  AR->ultimoNo[p]->CA_acao );
 
 				  AR->delNoUlt( AR->chainAction, player);
 
 				  while( AR->ultNo( AR->chainAction[player] )->pointer != NULL )
 				  {
+					  AR->atualiza_ultNo( AR->chainAction, player ); // Apos deletar o ultimo nó é preciso atualizar o vetor dos ultimos nós
+
 					  actNum++;
 					  reforco = 27*log(actNum)-15;
-					  MA->InsereReforco( AR->ultNo( AR->chainAction[player] )->CA_acao,
-							  AR->ultNo( AR->chainAction[player] )->CA_estadoAcao, reforco);
 
-					  player::Atualiza_MatrizQ( reforco, (AR->ultNo( AR->chainAction[player] ))->CA_estadoFinal,
-							  AR->ultNo( AR->chainAction[player] )->CA_estadoAcao,
-							  AR->ultNo( AR->chainAction[player] )->CA_acao );
+					  MA->InsereReforco( AR->ultimoNo[p]->CA_acao,
+							  AR->ultimoNo[p]->CA_estadoAcao, reforco);
+
+					  Atualiza_MatrizQ( reforco, AR->ultimoNo[p]->CA_estadoFinal,
+							  AR->ultimoNo[p]->CA_estadoAcao,
+							  AR->ultimoNo[p]->CA_acao );
+
+					  AR->delNoUlt( AR->chainAction, player);
 				  }
 				  /*
 				  if( WM->isFreeKickThem() ) // Tiro livre pra eles
@@ -200,7 +208,7 @@ SoccerCommand Player::deMeer5(  )
 
 				  }
 				  MA->InsereReforco( AR->acao, AR->s, reforco);
-				  }
+				  }// Apos deletar o ultimo no é preciso atualizar o vetor dos ultimos nós
 				  else if( WM->isGoalKickThem() ) // Tiro de meta pra eles
 				  {
 
@@ -243,25 +251,33 @@ SoccerCommand Player::deMeer5(  )
 			  {
 				  AR->CA_possession = 1;
 				  reforco = 2*exp(actNum/2) + 20;
-				  MA->InsereReforco( AR->ultNo( AR->chainAction[player] )->CA_acao,
-						  AR->ultNo( AR->chainAction[player] )->CA_estadoAcao, reforco);
-				  Player::Atualiza_MatrizQ( reforco, (AR->ultNo( AR->chainAction[player] ))->CA_estadoFinal,
-						  (AR->ultNo( AR->chainAction[player] ))->CA_estadoAcao,
-						  (AR->ultNo( AR->chainAction[player] ))->CA_acao );
 
-			  				  				  AR->delNoUlt( AR->chainAction, player);
+				  AR->atualiza_ultNo( AR->chainAction, player );
 
-			  				  				  while( AR->ultNo( AR->chainAction[player] )->pointer != NULL )
-			  				  				  {
-			  				  					  actNum++;
-			  				  					  reforco = 2*exp(actNum)+20;
-			  				  					  MA->InsereReforco( AR->ultNo( AR->chainAction[player] )->CA_acao,
-			  				  							  AR->ultNo( AR->chainAction[player] )->CA_estadoAcao, reforco);
+				  MA->InsereReforco( AR->ultimoNo[p]->CA_acao,
+				  						  AR->ultimoNo[p]->CA_estadoAcao, reforco);
+				  Atualiza_MatrizQ( reforco, AR->ultimoNo[p]->CA_estadoFinal,
+						  AR->ultimoNo[p]->CA_estadoAcao,
+						  AR->ultimoNo[p]->CA_acao );
 
-			  				  					  player::Atualiza_MatrizQ( reforco, AR->ultNo( AR->chainAction[player] )->CA_estadoFinal,
-			  				  							  AR->ultNo( AR->chainAction[player] )->CA_estadoAcao,
-			  				  							  AR->ultNo( AR->chainAction[player] )->CA_acao );
-												  }
+				  AR->delNoUlt( AR->chainAction, player);
+
+				  while( AR->ultNo( AR->chainAction[player] )->pointer != NULL )
+				  {
+					  AR->atualiza_ultNo( AR->chainAction, player );
+
+					  actNum++;
+					  reforco = 2*exp(actNum)+20;
+
+					  MA->InsereReforco( AR->ultNo( AR->chainAction[player] )->CA_acao,
+							  AR->ultNo( AR->chainAction[player] )->CA_estadoAcao, reforco);
+
+					  Atualiza_MatrizQ( reforco, AR->ultNo( AR->chainAction[player] )->CA_estadoFinal,
+							  AR->ultNo( AR->chainAction[player] )->CA_estadoAcao,
+							  AR->ultNo( AR->chainAction[player] )->CA_acao );
+
+					  AR->delNoUlt( AR->chainAction, player);
+				  }
 			  }
 			  /*else if( AR->saldo > AR->saldo_atual ) // Fizemos um gol
 			  {

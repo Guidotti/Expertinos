@@ -121,6 +121,7 @@ class Aprendizagem_Reforco
 
 	int CA_possession;
 	noChain chainAction[10];
+	noh* ultimoNo[10];
 
 	// Inicia a cadeia de acao
 	void initChain                           ( noh* chain[], int chain_lenght );
@@ -134,6 +135,8 @@ class Aprendizagem_Reforco
 	void delCA                               ( noh* chain[], int index        );
 	// Deleta o ultimo elemento da cadeia
 	void delNoUlt							 ( noh* chain[], int index        );
+	// Atualiza o ultimo No do respectivo jogador (index), na cadeia enviada
+	void atualiza_ultNo                      ( noh* chain[], int index        );
 };	
 
 extern Logger Log; /*!< This is a reference to Logger to write log info to*/

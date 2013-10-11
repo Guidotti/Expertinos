@@ -164,17 +164,19 @@ SoccerCommand Player::deMeer5(  )
 		  AR->ultNo( AR->chainAction[p] )->CA_estadoFinal = AR->s_new;
 		  if( possession != AR->CA_possession )
 		  {
+			  AR->noh* ultimoNo;
 			  if( AR->CA_possession == 1 ) // A bola estava com a gente
 			  {
 				  AR->CA_possession = 0;
 				  // Incrementar reforço negativo
 				  reforco = 27*log(actNum)-15;
-				  MA->InsereReforco( AR->ultNo( AR->chainAction[player] )->CA_acao,
-						  AR->ultNo( AR->chainAction[player] )->CA_estadoAcao, reforco);
+				  ultimoNo = AR->ultNo( AR->chainAction[ player ] );
+				  MA->InsereReforco( ultimoNo->CA_acao,
+						  ultimoNo->CA_estadoAcao, reforco);
 
-				  Player::Atualiza_MatrizQ( reforco, AR->ultNo( AR->chainAction[player] )->CA_estadoFinal,
-						  AR->ultNo( AR->chainAction[player] )->CA_estadoAcao,
-						  AR->ultNo( AR->chainAction[player] )->CA_acao );
+				  Player::Atualiza_MatrizQ( reforco, ultimoNo->CA_estadoFinal,
+						  ultimoNo->CA_estadoAcao,
+						  ultimoNo->CA_acao );
 
 				  AR->delNoUlt( AR->chainAction, player);
 
@@ -182,12 +184,13 @@ SoccerCommand Player::deMeer5(  )
 				  {
 					  actNum++;
 					  reforco = 27*log(actNum)-15;
-					  MA->InsereReforco( AR->ultNo( AR->chainAction[player] )->CA_acao,
-							  AR->ultNo( AR->chainAction[player] )->CA_estadoAcao, reforco);
+					  ultimoNo = AR->ultNo( AR->chainAction[ player ] );
+					  MA->InsereReforco( ultimoNo->CA_acao,
+							  ultimoNo->CA_estadoAcao, reforco);
 
-					  player::Atualiza_MatrizQ( reforco, AR->ultNo( AR->chainAction[player] )->CA_estadoFinal,
-							  AR->ultNo( AR->chainAction[player] )->CA_estadoAcao,
-							  AR->ultNo( AR->chainAction[player] )->CA_acao );
+					  player::Atualiza_MatrizQ( reforco, ultimoNo->CA_estadoFinal,
+							  ultimoNo->CA_estadoAcao,
+							  ultimoNo->CA_acao );
 				  }
 				  /*
 				  if( WM->isFreeKickThem() ) // Tiro livre pra eles
@@ -243,26 +246,23 @@ SoccerCommand Player::deMeer5(  )
 			  {
 				  AR->CA_possession = 1;
 				  reforco = 2*exp(actNum/2) + 20;
-			  				  				  MA->InsereReforco( AR->ultNo( AR->chainAction[player] )->CA_acao,
-			  				  						  AR->ultNo( AR->chainAction[player] )->CA_estadoAcao, reforco);
+				  MA->InsereReforco( AR->ultNo( AR->chainAction[player] )->CA_acao,
+						  AR->ultNo( AR->chainAction[player] )->CA_estadoAcao, reforco);
+				  Player::Atualiza_MatrizQ( reforco, (AR->ultNo( AR->chainAction[player] ))->CA_estadoFinal,
+						  (AR->ultNo( AR->chainAction[player] ))->CA_estadoAcao,
+						  (AR->ultNo( AR->chainAction[player] ))->CA_acao );
 
-			  				  				  Player::Atualiza_MatrizQ( reforco, AR->ultNo( AR->chainAction[player] )->CA_estadoFinal,
-			  				  						  AR->ultNo( AR->chainAction[player] )->CA_estadoAcao,
-			  				  						  AR->ultNo( AR->chainAction[player] )->CA_acao );
-
-			  				  				  AR->delNoUlt( AR->chainAction, player);
-
-			  				  				  while( AR->ultNo( AR->chainAction[player] )->pointer != NULL )
-			  				  				  {
-			  				  					  actNum++;
-			  				  					  reforco = 2*exp(actNum)+20;
-			  				  					  MA->InsereReforco( AR->ultNo( AR->chainAction[player] )->CA_acao,
-			  				  							  AR->ultNo( AR->chainAction[player] )->CA_estadoAcao, reforco);
-
-			  				  					  player::Atualiza_MatrizQ( reforco, AR->ultNo( AR->chainAction[player] )->CA_estadoFinal,
-			  				  							  AR->ultNo( AR->chainAction[player] )->CA_estadoAcao,
-			  				  							  AR->ultNo( AR->chainAction[player] )->CA_acao );
-												  }
+				  AR->delNoUlt( AR->chainAction, player);
+				  while( AR->ultNo( AR->chainAction[player] )->pointer != NULL )
+				  {
+					  actNum++;
+					  reforco = 2*exp(actNum)+20;
+					  MA->InsereReforco( AR->ultNo( AR->chainAction[player] )->CA_acao,
+							  AR->ultNo( AR->chainAction[player] )->CA_estadoAcao, reforco);
+					  player::Atualiza_MatrizQ( reforco, AR->ultNo( AR->chainAction[player] )->CA_estadoFinal,
+							  AR->ultNo( AR->chainAction[player] )->CA_estadoAcao,
+							  AR->ultNo( AR->chainAction[player] )->CA_acao );
+				  }
 			  }
 			  /*else if( AR->saldo > AR->saldo_atual ) // Fizemos um gol
 			  {

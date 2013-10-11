@@ -3614,3 +3614,9 @@ void Aprendizagem_Reforco::delNoUlt( noh* chain[], int index )
 	delete( aux );
 	ant->pointer = NULL;
 }
+
+void Aprendizagem_Reforco::atualiza_ultNo( noh* chain[], int index )
+{
+	index = index - 2;
+	ultimoNo[index] = ultNo( chain[index] );
+}
