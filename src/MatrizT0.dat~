@@ -1,0 +1,23 @@
+Felipe Lira Santana Silva - Bolsista do CNPQ modalidade PIBIC - Unifei
+Projeto de Pesquisa: Futebol Simulado 2D-Uma aplicação de Aprendizagem por reforço
+Estados: 15360 Ações: 13
+Matriz Transição  Jogador: 2 Numero do Jogo: 0
+
+Inicio
+Linha
+5 5 5
+Coluna
+0 0 0
+Coluna
+0 1 1
+Coluna
+0 2 2
+Linha
+2 2 2
+Coluna
+1 1 1
+Coluna
+2 2 2
+Linha
+3 3 3
+Fim

@@ -1,0 +1,97 @@
+
+/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 4; tab-width: 4 -*- */
+/*
+ * Time_Base2
+ * Copyright (C) Felipe Lira Santana Silva 2012 <felipe.lira.santana@gmail.com>
+ * 
+Time_Base2 is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the
+ * Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * Time_Base2 is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License along
+ * with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#ifndef _AR_MATRIZES_H_
+#define _AR_MATRIZES_H_
+
+ //numero de estados
+#define numEstados 15360 
+ //numero de acoes
+#define numAcoes 13 
+ //numero de chaves
+#define inum 7 
+
+#include "AR_matrizes.h"
+#include <iostream>
+using namespace std;
+#include <fstream>
+#include <cstdlib>
+
+/******************************************************************************/
+/***************************CLASS MATRIZES*************************************/
+/******************************************************************************/
+
+ /* Esta classe contém as principais matrizes de tamanho previamente conhecido 
+ utilizada na aprendizagem por reforço. As matrizes são:
+ Matriz de Estados: S
+ Matriz de Recompensa: R(SxA)
+ Matriz de Valor das ações: Q(SxA)
+ */
+
+class AR_Matrizes
+{
+//Numero maximo de discretizações em cada chave
+int chaves[inum] ;//= {4, 5, 4, 4, 3, 4, 4};
+// Matriz de estados 
+int S[numEstados][inum] ;
+
+// Matrizes de recompensa
+int R[10][numEstados][inum] ;
+
+
+
+//Estrutura de dados referente a linha da matriz esparsa (SxS) de cada ação
+typedef struct no{
+   int i, icont ;
+   struct no* iprox;
+   struct no* jini;
+} Itransicao ;
+
+//Vetor de ações para a matriz de transição
+Itransicao *T[13];
+
+typedef struct no2{
+   int j, jcont ;
+   char value ;
+   struct no2* jprox;
+} Jtransicao ;
+
+// Matrizes de valor-ação
+int Q[10][numEstados][inum] ;
+
+public:
+
+	//Construtor
+	AR_Matrizes                           (                                ) ;
+
+	//Destruidor
+	~AR_Matrizes                          (                                ) ;
+
+	//inicializa a matriz de estados
+    /* Este método inicializa a matriz de estados e salva em um arquivo csv*/
+void inicializaEstados();
+
+	
+	
+
+
+};
+
+#endif // _AR_MATRIZES_H_
