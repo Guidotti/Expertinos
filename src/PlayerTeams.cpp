@@ -156,48 +156,64 @@ SoccerCommand Player::deMeer5(  )
 		  else AR->gols_nosso++ ;
 	  }
 
-	  //Atualiza novo Estado
-	  AR->s_new = MA->RetornaEstado();
+	  /******************************* Q-Learning ***********************************/
+	      formations->setFormation( FT_343_ATTACKING );
 
-	  if( AR->ciclo_atual > 10 )
-	  {
-		  int actNum = 1; // Numero crescente da acao, comencando por 1 na ultima (primeira acao tomada na cadeia vai ter actNum maior)
-		  AR->ultNo( AR->chainAction[p] )->CA_estadoFinal = AR->s_new; // p = player - 2 (referente a posicao no vetor. Ex: Num. 2 -> p = 0 (min); Num. 11 -> p = 9 (max)
-		  if( possession != AR->CA_possession )
-		  {
-			  if( AR->CA_possession == 1 ) // Perdemos a bola
-			  {
-				  AR->CA_possession = 0;
-				  reforco = 27*log(actNum) - 15; // Colocando fora do looping é possivel conceder um reforco diferenciado a ultima acao
+	  	for( i=0; i < inum; i++ )
+	  	{
+	  		MA->InsereVetorS( i, estado[i] ) ;
+	  	}
 
-				  AR->atualiza_ultNo( AR->chainAction, player );
+	  	AR->AtualizaPlayerNum( player ) ;
+	  	AR->InicializaInformacoes();
 
-				  MA->InsereReforco( AR->ultimoNo[p]->CA_acao,
-						  AR->ultimoNo[p]->CA_estadoAcao, reforco);
+	  /******************************** Iteração ************************************/
+	  	if( MA->verAcao == 5 )
+	  	{
+	  		MA->verAcao = 0 ;
 
-				  Atualiza_MatrizQ( reforco, AR->ultimoNo[p]->CA_estadoFinal,
-						  AR->ultimoNo[p]->CA_estadoAcao,
-						  AR->ultimoNo[p]->CA_acao );
+	  		//Atualiza novo Estado
+	  		AR->s_new = MA->RetornaEstado();
 
-				  AR->delNoUlt( AR->chainAction, player);
+	  		if( AR->ciclo_atual > 10 )
+	  		{
+	  			int actNum = 1; // Numero crescente da acao, comencando por 1 na ultima (primeira acao tomada na cadeia vai ter actNum maior)
+	  			AR->ultNo( AR->chainAction[p] )->CA_estadoFinal = AR->s_new; // p = player - 2 (referente a posicao no vetor. Ex: Num. 2 -> p = 0 (min); Num. 11 -> p = 9 (max)
+	  			if( possession != AR->CA_possession )
+	  			{
+	  				if( AR->CA_possession == 1 ) // Perdemos a bola
+	  				{
+	  					AR->CA_possession = 0;
+	  					reforco = 27*log(actNum) - 15; // Colocando fora do looping é possivel conceder um reforco diferenciado a ultima acao
 
-				  while( AR->ultNo( AR->chainAction[player] )->pointer != NULL )
-				  {
-					  AR->atualiza_ultNo( AR->chainAction, player ); // Apos deletar o ultimo nó é preciso atualizar o vetor dos ultimos nós
+	  					AR->atualiza_ultNo( AR->chainAction, player );
 
-					  actNum++;
-					  reforco = 27*log(actNum)-15;
+	  					MA->InsereReforco( AR->ultimoNo[p]->CA_acao,
+	  							AR->ultimoNo[p]->CA_estadoAcao, reforco);
 
-					  MA->InsereReforco( AR->ultimoNo[p]->CA_acao,
-							  AR->ultimoNo[p]->CA_estadoAcao, reforco);
+	  					Atualiza_MatrizQ( reforco, AR->ultimoNo[p]->CA_estadoFinal,
+	  							AR->ultimoNo[p]->CA_estadoAcao,
+	  							AR->ultimoNo[p]->CA_acao );
 
-					  Atualiza_MatrizQ( reforco, AR->ultimoNo[p]->CA_estadoFinal,
-							  AR->ultimoNo[p]->CA_estadoAcao,
-							  AR->ultimoNo[p]->CA_acao );
+	  					AR->delNoUlt( AR->chainAction, player);
 
-					  AR->delNoUlt( AR->chainAction, player);
-				  }
-				  /*
+	  					while( AR->ultNo( AR->chainAction[player] )->pointer != NULL )
+	  					{
+	  						AR->atualiza_ultNo( AR->chainAction, player ); // Apos deletar o ultimo nó é preciso atualizar o vetor dos ultimos nós
+
+	  						actNum++;
+	  						reforco = 27*log(actNum)-15;
+
+	  						MA->InsereReforco( AR->ultimoNo[p]->CA_acao,
+	  								AR->ultimoNo[p]->CA_estadoAcao, reforco);
+
+	  						Atualiza_MatrizQ( reforco, AR->ultimoNo[p]->CA_estadoFinal,
+	  								AR->ultimoNo[p]->CA_estadoAcao,
+	  								AR->ultimoNo[p]->CA_acao );
+
+	  						AR->delNoUlt( AR->chainAction, player);
+	  					}
+	  					/*
 				  if( WM->isFreeKickThem() ) // Tiro livre pra eles
 				  {
 
@@ -245,41 +261,41 @@ SoccerCommand Player::deMeer5(  )
 				  {
 
 				  }*/
-				  AR->delCA(AR->chainAction, p);
-			  }
-			  else // bola recuperada
-			  {
-				  AR->CA_possession = 1;
-				  reforco = 2*exp(actNum/2) + 20;
+	  					AR->delCA(AR->chainAction, p);
+	  				}
+	  				else // bola recuperada
+	  				{
+	  					AR->CA_possession = 1;
+	  					reforco = 2*exp(actNum/2) + 20;
 
-				  AR->atualiza_ultNo( AR->chainAction, player );
+	  					AR->atualiza_ultNo( AR->chainAction, player );
 
-				  MA->InsereReforco( AR->ultimoNo[p]->CA_acao,
-				  						  AR->ultimoNo[p]->CA_estadoAcao, reforco);
-				  Atualiza_MatrizQ( reforco, AR->ultimoNo[p]->CA_estadoFinal,
-						  AR->ultimoNo[p]->CA_estadoAcao,
-						  AR->ultimoNo[p]->CA_acao );
+	  					MA->InsereReforco( AR->ultimoNo[p]->CA_acao,
+	  							AR->ultimoNo[p]->CA_estadoAcao, reforco);
+	  					Atualiza_MatrizQ( reforco, AR->ultimoNo[p]->CA_estadoFinal,
+	  							AR->ultimoNo[p]->CA_estadoAcao,
+	  							AR->ultimoNo[p]->CA_acao );
 
-				  AR->delNoUlt( AR->chainAction, player);
+	  					AR->delNoUlt( AR->chainAction, player);
 
-				  while( AR->ultNo( AR->chainAction[player] )->pointer != NULL )
-				  {
-					  AR->atualiza_ultNo( AR->chainAction, player );
+	  					while( AR->ultNo( AR->chainAction[player] )->pointer != NULL )
+	  					{
+	  						AR->atualiza_ultNo( AR->chainAction, player );
 
-					  actNum++;
-					  reforco = 2*exp(actNum)+20;
+	  						actNum++;
+	  						reforco = 2*exp(actNum)+20;
 
-					  MA->InsereReforco( AR->ultNo( AR->chainAction[player] )->CA_acao,
-							  AR->ultNo( AR->chainAction[player] )->CA_estadoAcao, reforco);
+	  						MA->InsereReforco( AR->ultNo( AR->chainAction[player] )->CA_acao,
+	  								AR->ultNo( AR->chainAction[player] )->CA_estadoAcao, reforco);
 
-					  Atualiza_MatrizQ( reforco, AR->ultNo( AR->chainAction[player] )->CA_estadoFinal,
-							  AR->ultNo( AR->chainAction[player] )->CA_estadoAcao,
-							  AR->ultNo( AR->chainAction[player] )->CA_acao );
+	  						Atualiza_MatrizQ( reforco, AR->ultNo( AR->chainAction[player] )->CA_estadoFinal,
+	  								AR->ultNo( AR->chainAction[player] )->CA_estadoAcao,
+	  								AR->ultNo( AR->chainAction[player] )->CA_acao );
 
-					  AR->delNoUlt( AR->chainAction, player);
-				  }
-			  }
-			  /*else if( AR->saldo > AR->saldo_atual ) // Fizemos um gol
+	  						AR->delNoUlt( AR->chainAction, player);
+	  					}
+	  				}
+	  				/*else if( AR->saldo > AR->saldo_atual ) // Fizemos um gol
 			  {
 				  AR->CA_possession = 0;
 				  reforco = 2*log(actNum/2)+20;
@@ -302,251 +318,234 @@ SoccerCommand Player::deMeer5(  )
 					  player::Atualiza_MatrizQ( reforco, AR->ultNo( AR->chainAction[player] )->CA_estadoFinal,
 							  AR->ultNo( AR->chainAction[player] )->CA_estadoAcao,
 							  AR->ultNo( AR->chainAction[player] )->CA_acao );
-				  }
-			  }*/
+					  }
+				  }*/
 
-		  }
-	  }
+	  			}
+	  		}
 
+	  		/***************************** Calculo Reforço ********************************/
 
-/******************************* Q-Learning ***********************************/
-    formations->setFormation( FT_343_ATTACKING );
+	  		for( i = 0; i < inum; i++ )
+	  		{
+	  			e[i] = MA->RetornachaveEstado( AR->s, i ) ;
+	  			e_new[i] = MA->RetornachaveEstado( AR->s_new, i ) ;
+	  		}
 
-	for( i=0; i < inum; i++ )
-	{
-		MA->InsereVetorS( i, estado[i] ) ;
-	}
+	  		//if( WM->getPlayerNumber() == 8 )cerr << AR->ciclo_atual << " " << e[3] << e_new[3] << endl;
+	  		//Reforco do Gol tomado ou não
+	  		if( AR->saldo != AR->saldo_atual )
+	  		{
+	  			if( AR->saldo < AR->saldo_atual ) reforco += -100 ;
+	  			else reforco += 75 ;
+	  		}
 
-	AR->AtualizaPlayerNum( player ) ;
-	AR->InicializaInformacoes();
-    
-/******************************** Iteração ************************************/
-	if( MA->verAcao == 5 )
-	{
-		MA->verAcao = 0 ;
+	  		//reforco da Posição do jogador
+	  		if( player == 2 || player == 3 || player == 4)
+	  		{
+	  			if( e_new[0] == 0 || e_new[0] == 1 || e_new[0] == 2 || e_new[0] == 3
+	  					|| e_new[0] == 4 || e_new[0] == 5 )
+	  				reforco += 5;
+	  			else reforco += -20;
+	  		}
 
-/***************************** Calculo Reforço ********************************/
+	  		if( player == 11 || player == 10 || player == 9)
+	  		{
+	  			if( e_new[0] == 6 || e_new[0] == 7 || e_new[0] == 8 || e_new[0] == 9
+	  					|| e_new[0] == 10 || e_new[0] == 11 )
+	  				reforco += 5;
+	  			else reforco += -5;
+	  		}
 
-		for( i = 0; i < inum; i++ )
-		{
-			e[i] = MA->RetornachaveEstado( AR->s, i ) ;
-			e_new[i] = MA->RetornachaveEstado( AR->s_new, i ) ;
-		}
+	  		//reforço da posição da bola
+	  		if( e_new[1] == 0 ) reforco += -15;
+	  		else if( e_new[1] == 2 ) reforco += 20;
 
-		//if( WM->getPlayerNumber() == 8 )cerr << AR->ciclo_atual << " " << e[3] << e_new[3] << endl;
-		//Reforco do Gol tomado ou não
-		if( AR->saldo != AR->saldo_atual )
-		{
-			if( AR->saldo < AR->saldo_atual ) reforco += -100 ;
-			else reforco += 75 ;
-		}
-		
-		//reforco da Posição do jogador
-		if( player == 2 || player == 3 || player == 4)
-		{
-			if( e_new[0] == 0 || e_new[0] == 1 || e_new[0] == 2 || e_new[0] == 3
-			   	|| e_new[0] == 4 || e_new[0] == 5 )
-				reforco += 5;
-			else reforco += -20;
-		}
+	  		//reforço da posse de bola
+	  		if( e_new[2] == 1 ) reforco += 5;
+	  		else reforco += -10;
 
-		if( player == 11 || player == 10 || player == 9)
-		{
-			if( e_new[0] == 6 || e_new[0] == 7 || e_new[0] == 8 || e_new[0] == 9
-			   	|| e_new[0] == 10 || e_new[0] == 11 )
-				reforco += 5;
-			else reforco += -5;
-		}
+	  		//reforço da Distancia da bola
+	  		if( e[3] > 0 && e_new[3] == 0 ) reforco += 10;
+	  		if( e[3] == 0 && e_new[3] > 0 ) reforco += -20;
 
-		//reforço da posição da bola
-		if( e_new[1] == 0 ) reforco += -15;
-		else if( e_new[1] == 2 ) reforco += 20;
+	  		//reforço da distancia ao aliado e oponente mais proximo
+	  		if( e_new[4] == 0 || e_new[5] == 0 ) reforco += -5;
 
-		//reforço da posse de bola
-		if( e_new[2] == 1 ) reforco += 5;
-		else reforco += -10;
+	  		//reforço do angulo ao oponente
+	  		if( e_new[6] == 3 ) reforco += 5;
 
-		//reforço da Distancia da bola
-		if( e[3] > 0 && e_new[3] == 0 ) reforco += 10;
-		if( e[3] == 0 && e_new[3] > 0 ) reforco += -20;
-
-		//reforço da distancia ao aliado e oponente mais proximo
-		if( e_new[4] == 0 || e_new[5] == 0 ) reforco += -5;
-
-		//reforço do angulo ao oponente
-		if( e_new[6] == 3 ) reforco += 5;
-
-		//reforço do angulo do agente
-		if( e_new[7] == 2 ) reforco += -5;
-		else reforco += 5;
-
-		
-		MA->InsereReforco( AR->acao, AR->s, reforco);
+	  		//reforço do angulo do agente
+	  		if( e_new[7] == 2 ) reforco += -5;
+	  		else reforco += 5;
 
 
-/*************************** Atualiza Matriz Q ********************************/
-
-		r = MA->RetornaReforco( AR->acao, AR->s );
+	  		MA->InsereReforco( AR->acao, AR->s, reforco);
 
 
-		delta = r + desconto*MA->RetornaMaxQ(AR->s_new) ;
-	    //Coeficiente de decaimento ajustado para 
-		// 1/((ln iteracao)/10000)
-		coef1 = ((1/(log((AR->Iteracao_cont/24000.0) + 2.72))));
-		coef2 = (-1)*WM->getGoalDiff( )/5.0 ;
-		if( coef2 < 0.0 ) coef2 = 0.0 ;
-		//if( coef1 < coef2 ) coef1 = coef2 ;
-		coef1 = coef1 + coef2 ;
-		if( coef1 > 1 ) coef1 = 1 ;
-		dQ = coef1*delta ;
-		
-		MA->InsereMatrizQ( AR->acao, AR->s, (1-coef1)*MA->RetornaValorQ(AR->acao, AR->s) + dQ ) ;
-		// (1-coef1)*Q(s,a) + coef1*(reforco + desconto*maxQ(s:))
-		MA->InsereTransicao( AR->acao, AR->s, AR->s_new ) ;
-		AR->Iteracao_cont++ ;
+	  		/*************************** Atualiza Matriz Q ********************************/
 
-/******************************************************************************/
-
-		AR->dir_bola2 = AR->dir_bola ;
-		AR->vel_bola2 = AR->vel_bola ;
-	}
-  
-
-	
-	  
-/****************************** Escolha Ação **********************************/
+	  		r = MA->RetornaReforco( AR->acao, AR->s );
 
 
-	MA->verAcao = 5 ;
+	  		delta = r + desconto*MA->RetornaMaxQ(AR->s_new) ;
+	  		//Coeficiente de decaimento ajustado para
+	  		// 1/((ln iteracao)/10000)
+	  		coef1 = ((1/(log((AR->Iteracao_cont/24000.0) + 2.72))));
+	  		coef2 = (-1)*WM->getGoalDiff( )/5.0 ;
+	  		if( coef2 < 0.0 ) coef2 = 0.0 ;
+	  		//if( coef1 < coef2 ) coef1 = coef2 ;
+	  		coef1 = coef1 + coef2 ;
+	  		if( coef1 > 1 ) coef1 = 1 ;
+	  		dQ = coef1*delta ;
 
-	AR->ultNo( AR->chainAction[p] )->CA_estadoFinal = AR->s;
-	AR->s = AR->s_new;
+	  		MA->InsereMatrizQ( AR->acao, AR->s, (1-coef1)*MA->RetornaValorQ(AR->acao, AR->s) + dQ ) ;
+	  		// (1-coef1)*Q(s,a) + coef1*(reforco + desconto*maxQ(s:))
+	  		MA->InsereTransicao( AR->acao, AR->s, AR->s_new ) ;
+	  		AR->Iteracao_cont++ ;
 
-	AR->addNo_Ultimo( AR->chainAction, player );
+	  		/******************************************************************************/
 
-	srand(WM->getPlayerNumber()*rand());
-	prob = (rand()%1000001)/1000000.00;
-	
-	if( prob < (1.00 - (1.00/log((AR->Iteracao_cont/24000) + 2.72 ))))
-	{
-		//cerr << "Acao Otima";
-		AR->acao = MA->RetornaAcaoOtima(AR->s, estado[3]) ;
-		//cerr << acao << '\n';
-		//if( WM->getPlayerNumber() == 9 ) cerr << "Soh tah entrando aqui" << AR->acao << '\n';
-	}
-	else
-	{
-		//if( WM->getPlayerNumber() == 9 ) cerr << "Tah aqui tbm" << AR->acao << '\n';
-		//cerr << "Acao Aleatoria";
-		if( estado[3] == 0 )
-		{
-			AR->acao = rand()%9;
-		}
-		else
-		{
-			prob = rand()%4;
-			if( prob == 0 ) AR->acao = 9;
-			else if( prob == 1 ) AR->acao = 10;
-			else if( prob == 2 ) AR->acao = 11;
-			else if( prob == 3 ) AR->acao = 12;
-		}
-	}
-
-	AR->AdicionaContA( AR->acao ) ;
-	WM->acaoWM == AR->acao;
-
-	AR->ultNo(AR->chainAction[p])->CA_acao = AR->acao;
-	AR->ultNo(AR->chainAction[p])->CA_estadoAcao = AR->s_new;
-	AR->ultNo(AR->chainAction[p])->CA_estadoFinal = -1;
-	  
-/************************** Conversão em Comando ******************************/
-
-	int infor = AR->acao;
-	switch( AR->acao )
-	{
-		case 0:
-			soc = AR_SafeDribble ();
-			break;
-		case 1:
-			soc = AR_FastDribble ();
-			break;
-		case 2:
-			soc = AR_SafeDribblePlus30 ();
-			break;
-		case 3:
-			soc = AR_SafeDribbleMinus30 ();
-		    break;
-		case 4:
-			soc = AR_SafeDribblePlus90 ();
-			break;
-		case 5:
-			soc = AR_SafeDribbleMinus90 ();
-			break;
-		case 6:
-			soc = AR_directPassNormal ();
-			break;
-		case 7:
-			soc = AR_directShootGoal ();
-			break;
-		case 8:
-			soc = freezeBall( );
-			break;
-		case 9:
-			soc = intercept (false);
-			MA->InsereVetorA( 9, 5 );
-			break;
-		case 10:
-			soc = AR_markOppAndBall ();
-			//if( soc == CMD_ILLEGAL ) soc = intercept (false);
-			break;
-		case 11:
-			soc = turnBodyToObject( OBJECT_BALL ) ;//AR_markOppAndGoal ();
-			//if( soc == CMD_ILLEGAL ) soc = AR_moveToStrategicPos ();
-			break;
-		case 12:
-			soc = moveToPos(WM->getStrategicPosition(),
-                         PS->getPlayerWhenToTurnAngle());
-			break;
-		//Ação Padrão é interceptar a bola se estiver sem a bola e
-		//isolar a bola se estiver com ela.
-		default:
-			if( estado[3] == 0 ) soc = clearBall( CLEAR_BALL_DEFENSIVE );
-			else soc = intercept (false);
-			break;
-	}
+	  		AR->dir_bola2 = AR->dir_bola ;
+	  		AR->vel_bola2 = AR->vel_bola ;
+	  	}
 
 
-/********************* Inclusão da ação na fila de execução *******************/
-	
-	  //Análise da stamina à parte da Aprendizagem e proteção contra ações
-	  // indevidas como chutar a bola sem ter a posse.
-	  if( soc.commandType == CMD_DASH &&             // if stamina low
-          WM->getAgentStamina().getStamina() <
-             SS->getRecoverDecThr()*SS->getStaminaMax()+200 )
-		  {
-		    soc.dPower = 30.0 * WM->getAgentStamina().getRecovery(); // dash slow
-		    if( estado[3] == 0 )
-			{
-				if( AR->acao >= 0 && AR->acao <= 8 )
-				ACT->putCommandInQueue( soc );
-			}
-			else if( AR->acao >= 9 && AR->acao <= 12 )
-				ACT->putCommandInQueue( soc );
 
-		  }
-		  else                                           // if stamina high
-		  {
-		    if( estado[3] == 0 )
-			{
-				if( AR->acao >= 0 && AR->acao <= 8 )
-				ACT->putCommandInQueue( soc );
-			}
-			else if( AR->acao >= 9 && AR->acao <= 12 )
-				ACT->putCommandInQueue( soc );
-               // dash as intended
-		  }
 
-	AR->ciclo_ant = AR->ciclo_atual ;  
+	  	/****************************** Escolha Ação **********************************/
+
+
+	  	MA->verAcao = 5 ;
+
+	  	AR->ultNo( AR->chainAction[p] )->CA_estadoFinal = AR->s;
+	  	AR->s = AR->s_new;
+
+	  	AR->addNo_Ultimo( AR->chainAction, player );
+
+	  	srand(WM->getPlayerNumber()*rand());
+	  	prob = (rand()%1000001)/1000000.00;
+
+	  	if( prob < (1.00 - (1.00/log((AR->Iteracao_cont/24000) + 2.72 ))))
+	  	{
+	  		//cerr << "Acao Otima";
+	  		AR->acao = MA->RetornaAcaoOtima(AR->s, estado[3]) ;
+	  		//cerr << acao << '\n';
+	  		//if( WM->getPlayerNumber() == 9 ) cerr << "Soh tah entrando aqui" << AR->acao << '\n';
+	  	}
+	  	else
+	  	{
+	  		//if( WM->getPlayerNumber() == 9 ) cerr << "Tah aqui tbm" << AR->acao << '\n';
+	  		//cerr << "Acao Aleatoria";
+	  		if( estado[3] == 0 )
+	  		{
+	  			AR->acao = rand()%9;
+	  		}
+	  		else
+	  		{
+	  			prob = rand()%4;
+	  			if( prob == 0 ) AR->acao = 9;
+	  			else if( prob == 1 ) AR->acao = 10;
+	  			else if( prob == 2 ) AR->acao = 11;
+	  			else if( prob == 3 ) AR->acao = 12;
+	  		}
+	  	}
+
+	  	AR->AdicionaContA( AR->acao ) ;
+	  	WM->acaoWM == AR->acao;
+
+	  	AR->ultNo(AR->chainAction[p])->CA_acao = AR->acao;
+	  	AR->ultNo(AR->chainAction[p])->CA_estadoAcao = AR->s_new;
+	  	AR->ultNo(AR->chainAction[p])->CA_estadoFinal = -1;
+
+	  	/************************** Conversão em Comando ******************************/
+
+	  	int infor = AR->acao;
+	  	switch( AR->acao )
+	  	{
+	  	case 0:
+	  		soc = AR_SafeDribble ();
+	  		break;
+	  	case 1:
+	  		soc = AR_FastDribble ();
+	  		break;
+	  	case 2:
+	  		soc = AR_SafeDribblePlus30 ();
+	  		break;
+	  	case 3:
+	  		soc = AR_SafeDribbleMinus30 ();
+	  		break;
+	  	case 4:
+	  		soc = AR_SafeDribblePlus90 ();
+	  		break;
+	  	case 5:
+	  		soc = AR_SafeDribbleMinus90 ();
+	  		break;
+	  	case 6:
+	  		soc = AR_directPassNormal ();
+	  		break;
+	  	case 7:
+	  		soc = AR_directShootGoal ();
+	  		break;
+	  	case 8:
+	  		soc = freezeBall( );
+	  		break;
+	  	case 9:
+	  		soc = intercept (false);
+	  		MA->InsereVetorA( 9, 5 );
+	  		break;
+	  	case 10:
+	  		soc = AR_markOppAndBall ();
+	  		//if( soc == CMD_ILLEGAL ) soc = intercept (false);
+	  		break;
+	  	case 11:
+	  		soc = turnBodyToObject( OBJECT_BALL ) ;//AR_markOppAndGoal ();
+	  		//if( soc == CMD_ILLEGAL ) soc = AR_moveToStrategicPos ();
+	  		break;
+	  	case 12:
+	  		soc = moveToPos(WM->getStrategicPosition(),
+	  				PS->getPlayerWhenToTurnAngle());
+	  		break;
+	  		//Ação Padrão é interceptar a bola se estiver sem a bola e
+	  		//isolar a bola se estiver com ela.
+	  	default:
+	  		if( estado[3] == 0 ) soc = clearBall( CLEAR_BALL_DEFENSIVE );
+	  		else soc = intercept (false);
+	  		break;
+	  	}
+
+
+	  	/********************* Inclusão da ação na fila de execução *******************/
+
+	  	//Análise da stamina à parte da Aprendizagem e proteção contra ações
+	  	// indevidas como chutar a bola sem ter a posse.
+	  	if( soc.commandType == CMD_DASH &&             // if stamina low
+	  			WM->getAgentStamina().getStamina() <
+	  			SS->getRecoverDecThr()*SS->getStaminaMax()+200 )
+	  	{
+	  		soc.dPower = 30.0 * WM->getAgentStamina().getRecovery(); // dash slow
+	  		if( estado[3] == 0 )
+	  		{
+	  			if( AR->acao >= 0 && AR->acao <= 8 )
+	  				ACT->putCommandInQueue( soc );
+	  		}
+	  		else if( AR->acao >= 9 && AR->acao <= 12 )
+	  			ACT->putCommandInQueue( soc );
+
+	  	}
+	  	else                                           // if stamina high
+	  	{
+	  		if( estado[3] == 0 )
+	  		{
+	  			if( AR->acao >= 0 && AR->acao <= 8 )
+	  				ACT->putCommandInQueue( soc );
+	  		}
+	  		else if( AR->acao >= 9 && AR->acao <= 12 )
+	  			ACT->putCommandInQueue( soc );
+	  		// dash as intended
+	  	}
+
+	  	AR->ciclo_ant = AR->ciclo_atual ;
   }
 
   return soc;
