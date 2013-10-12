@@ -1,7 +1,7 @@
 Felipe Lira Santana Silva - Bolsista do CNPQ modalidade PIBIC - Unifei
 Projeto de Pesquisa: Futebol Simulado 2D-Uma aplicação de Aprendizagem por reforço
 Estados: 82944 Ações: 13
-Matriz Valor Acao Jogador: 9 Numero do Jogo: 0
+Matriz Valor Acao Jogador: 9 Numero do Jogo: 29
 
 Inicio
 Linha
@@ -957,13 +957,13 @@ Linha
 Coluna
 75038 2 1
 Linha
-0 82944 104
+0 82944 106
 Coluna
 50498 1 0
 Coluna
 74940 1 0
 Coluna
-82944 102 0
+82944 104 0
 Linha
 1 15360 11
 Coluna
@@ -2395,7 +2395,7 @@ Linha
 Coluna
 75038 2 1
 Linha
-2 82944 112
+2 82944 113
 Coluna
 31142 1 0
 Coluna
@@ -2403,7 +2403,7 @@ Coluna
 Coluna
 75518 1 0
 Coluna
-82944 109 0
+82944 110 0
 Linha
 3 15360 17
 Coluna
@@ -3045,7 +3045,7 @@ Linha
 Coluna
 75038 2 1
 Linha
-3 82944 131
+3 82944 132
 Coluna
 31158 1 0
 Coluna
@@ -3053,7 +3053,7 @@ Coluna
 Coluna
 74942 1 0
 Coluna
-82944 128 0
+82944 129 0
 Linha
 4 15360 13
 Coluna
@@ -3751,7 +3751,7 @@ Linha
 Coluna
 74942 1 1
 Linha
-4 82944 105
+4 82944 106
 Coluna
 31242 1 0
 Coluna
@@ -3759,7 +3759,7 @@ Coluna
 Coluna
 53016 1 0
 Coluna
-82944 102 0
+82944 103 0
 Linha
 5 15360 16
 Coluna
@@ -5785,13 +5785,13 @@ Linha
 Coluna
 74948 1 1
 Linha
-7 82944 86
+7 82944 87
 Coluna
 31434 1 0
 Coluna
 50748 1 0
 Coluna
-82944 84 0
+82944 85 0
 Linha
 8 15360 16
 Coluna
@@ -11329,7 +11329,7 @@ Linha
 Coluna
 82524 1 1
 Linha
-9 82944 281
+9 82944 305
 Coluna
 29764 1 0
 Coluna
@@ -11371,11 +11371,13 @@ Coluna
 Coluna
 82428 1 0
 Coluna
-82944 260 0
+82944 284 0
 Linha
-10 0 1
+10 0 3
 Coluna
 31408 1 1
+Coluna
+82944 2 0
 Linha
 10 14724 2
 Coluna
@@ -17381,7 +17383,7 @@ Coluna
 Coluna
 82516 1 0
 Linha
-10 82944 506
+10 82944 524
 Coluna
 29812 1 0
 Coluna
@@ -17423,7 +17425,7 @@ Coluna
 Coluna
 75516 1 0
 Coluna
-82944 485 0
+82944 503 0
 Linha
 11 14724 1
 Coluna
@@ -22503,7 +22505,7 @@ Coluna
 Coluna
 82524 2 1
 Linha
-11 82944 433
+11 82944 454
 Coluna
 30244 1 0
 Coluna
@@ -22555,7 +22557,7 @@ Coluna
 Coluna
 75898 1 0
 Coluna
-82944 403 0
+82944 424 0
 Linha
 12 14724 1
 Coluna
@@ -28941,7 +28943,7 @@ Coluna
 Coluna
 82508 1 0
 Linha
-12 82944 473
+12 82944 493
 Coluna
 24900 1 0
 Coluna
@@ -28999,5 +29001,5 @@ Coluna
 Coluna
 75846 1 0
 Coluna
-82944 443 0
+82944 463 0
 Fim
