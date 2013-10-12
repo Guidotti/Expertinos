@@ -120,7 +120,7 @@ void BasicCoach::mainLoopNormal( )
     }
     else if( WM->getTimeLastSeeGlobalMessage().getTime() == 0 &&
              bSubstituted == false &&
-             WM->isConfidenceGood( OBJECT_TEAMMATE_11 ))
+             WM->isConfidenceGood( OBJECT_TEAMMATE_11 ) &&  WM->isConfidenceGood( OBJECT_TEAMMATE_10))
     {
       // read (and write) all player_type information 
       for( int i = 0 ; i < MAX_HETERO_PLAYERS; i ++ )
@@ -132,6 +132,7 @@ void BasicCoach::mainLoopNormal( )
 
       // just substitute some players (define your own methods to
       // determine which player types should be substituted )
+
       substitutePlayer(  2, 1 );  // substitute player 2 to type 1
       substitutePlayer(  3, 2 );
       substitutePlayer(  4, 3 );
@@ -142,6 +143,7 @@ void BasicCoach::mainLoopNormal( )
       substitutePlayer(  9, 8 );
       substitutePlayer( 10, 9 );
       substitutePlayer( 11, 10 );
+
       bSubstituted = true;
     }
   
@@ -202,6 +204,7 @@ void BasicCoach::handleStdin( )
     fgets( buf, MAX_MSG, stdin ); // does unblock with signal !!!!!
 #endif
     printf( "after fgets: %s\n", buf );
+	  cerr << "################## TESTE ##################";
     executeStringCommand( buf );
   }
 }
@@ -242,12 +245,3 @@ bool BasicCoach::executeStringCommand( char *str)
   return true;
 }
 
-void BasicCoach::InicializaRelatorio()
-{
-	AR->InicializaInformacoes ();
-}
-
-void BasicCoach::SalvaRelatorio()
-{
-	AR->SalvaInformacoes ();
-}

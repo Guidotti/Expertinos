@@ -1,7 +1,7 @@
 Felipe Lira Santana Silva - Bolsista do CNPQ modalidade PIBIC - Unifei
 Projeto de Pesquisa: Futebol Simulado 2D-Uma aplicação de Aprendizagem por reforço
 Estados: 82944 Ações: 13
-Matriz Valor Acao Jogador: 8 Numero do Jogo: 29
+Matriz Valor Acao Jogador: 8 Numero do Jogo: 0
 
 Inicio
 Linha
@@ -539,11 +539,11 @@ Coluna
 Coluna
 29788 1 0
 Linha
-0 29780 7
+0 29780 8
 Coluna
 28916 1 0
 Coluna
-29780 4 0
+29780 5 0
 Coluna
 29812 2 0
 Linha
@@ -596,6 +596,10 @@ Linha
 0 29836 1
 Coluna
 28940 1 1
+Linha
+0 29852 1
+Coluna
+29852 1 1
 Linha
 0 29892 1
 Coluna
@@ -751,6 +755,10 @@ Linha
 Coluna
 30972 1 1
 Linha
+0 31004 1
+Coluna
+31004 1 1
+Linha
 0 31116 1
 Coluna
 31116 1 1
@@ -897,6 +905,10 @@ Coluna
 Coluna
 31836 1 1
 Linha
+0 31268 1
+Coluna
+31268 1 1
+Linha
 0 31274 1
 Coluna
 31274 1 1
@@ -926,6 +938,10 @@ Linha
 0 31828 1
 Coluna
 31836 1 1
+Linha
+0 31844 1
+Coluna
+31844 1 1
 Linha
 0 32066 1
 Coluna
@@ -991,7 +1007,7 @@ Linha
 Coluna
 58852 1 1
 Linha
-0 82944 189
+0 82944 246
 Coluna
 22044 1 0
 Coluna
@@ -1005,7 +1021,7 @@ Coluna
 Coluna
 32098 1 0
 Coluna
-82944 183 0
+82944 240 0
 Linha
 1 13828 2
 Coluna
@@ -1865,11 +1881,15 @@ Linha
 Coluna
 31234 1 1
 Linha
-1 31268 2
+1 31268 3
 Coluna
 31282 2 1
+Coluna
+82944 1 0
 Linha
-1 31274 2
+1 31274 3
+Coluna
+31266 1 0
 Coluna
 31274 2 1
 Linha
@@ -1935,19 +1955,23 @@ Linha
 Coluna
 59348 1 1
 Linha
-1 82944 206
+1 82944 269
 Coluna
 29822 1 0
 Coluna
 31234 1 0
 Coluna
-82944 204 0
+82944 267 0
 Linha
-2 0 3
+2 0 9
 Coluna
 31240 1 1
 Coluna
-31264 2 0
+31264 4 0
+Coluna
+32144 1 0
+Coluna
+82944 3 0
 Linha
 2 13828 1
 Coluna
@@ -2661,7 +2685,7 @@ Linha
 Coluna
 31246 1 1
 Linha
-2 31264 14
+2 31264 15
 Coluna
 30952 1 0
 Coluna
@@ -2672,12 +2696,20 @@ Coluna
 31240 3 0
 Coluna
 31264 6 0
+Coluna
+32128 1 0
 Linha
-2 31266 2
+2 31266 3
 Coluna
 30978 1 1
 Coluna
 31266 1 0
+Coluna
+82944 1 0
+Linha
+2 31268 2
+Coluna
+31268 2 1
 Linha
 2 31280 1
 Coluna
@@ -2743,7 +2775,7 @@ Linha
 Coluna
 54298 1 1
 Linha
-2 82944 193
+2 82944 249
 Coluna
 28676 1 0
 Coluna
@@ -2755,7 +2787,7 @@ Coluna
 Coluna
 29820 1 0
 Coluna
-82944 188 0
+82944 244 0
 Linha
 3 13828 1
 Coluna
@@ -3579,6 +3611,10 @@ Coluna
 Coluna
 31842 1 0
 Linha
+3 31268 1
+Coluna
+31268 1 1
+Linha
 3 31274 2
 Coluna
 31274 2 1
@@ -3681,7 +3717,7 @@ Linha
 Coluna
 58780 1 1
 Linha
-3 82944 251
+3 82944 307
 Coluna
 27710 1 0
 Coluna
@@ -3691,9 +3727,11 @@ Coluna
 Coluna
 31266 2 0
 Coluna
+31286 1 0
+Coluna
 31810 1 0
 Coluna
-82944 245 0
+82944 300 0
 Linha
 4 13828 3
 Coluna
@@ -4557,9 +4595,9 @@ Linha
 Coluna
 31236 1 1
 Linha
-4 31264 5
+4 31264 7
 Coluna
-31264 4 1
+31264 6 0
 Coluna
 31280 1 0
 Linha
@@ -4575,9 +4613,9 @@ Coluna
 Coluna
 31292 1 0
 Linha
-4 31286 2
+4 31286 4
 Coluna
-31286 2 1
+31286 4 1
 Linha
 4 32402 1
 Coluna
@@ -4645,9 +4683,9 @@ Linha
 Coluna
 82944 1 1
 Linha
-4 82944 196
+4 82944 258
 Coluna
-82944 196 1
+82944 258 1
 Linha
 5 13828 4
 Coluna
@@ -5449,15 +5487,25 @@ Coluna
 Coluna
 31260 5 0
 Linha
-5 31264 6
+5 31264 7
 Coluna
 31232 1 1
 Coluna
 31240 5 0
+Coluna
+31264 1 0
 Linha
 5 31266 1
 Coluna
 31266 1 1
+Linha
+5 31268 1
+Coluna
+31268 1 1
+Linha
+5 31286 1
+Coluna
+31286 1 1
 Linha
 5 31812 1
 Coluna
@@ -5519,13 +5567,13 @@ Linha
 Coluna
 53030 1 1
 Linha
-5 82944 216
+5 82944 266
 Coluna
 31232 1 0
 Coluna
 31238 1 0
 Coluna
-82944 214 0
+82944 264 0
 Linha
 6 13828 2
 Coluna
@@ -6321,9 +6369,11 @@ Linha
 Coluna
 31234 1 1
 Linha
-6 31286 2
+6 31286 5
 Coluna
-31286 2 1
+31286 4 1
+Coluna
+82944 1 0
 Linha
 6 31292 1
 Coluna
@@ -6415,7 +6465,7 @@ Linha
 Coluna
 75014 3 1
 Linha
-6 82944 223
+6 82944 276
 Coluna
 29816 1 0
 Coluna
@@ -6423,9 +6473,11 @@ Coluna
 Coluna
 31266 1 0
 Coluna
+31268 1 0
+Coluna
 31274 1 0
 Coluna
-82944 219 0
+82944 271 0
 Linha
 7 13828 1
 Coluna
@@ -7149,6 +7201,10 @@ Coluna
 Coluna
 31264 1 1
 Linha
+7 31268 2
+Coluna
+31268 2 1
+Linha
 7 31270 1
 Coluna
 31846 1 1
@@ -7163,9 +7219,9 @@ Coluna
 Coluna
 31280 1 1
 Linha
-7 31286 2
+7 31286 4
 Coluna
-31286 2 1
+31286 4 1
 Linha
 7 31292 2
 Coluna
@@ -7249,11 +7305,11 @@ Linha
 Coluna
 75014 1 1
 Linha
-7 82944 186
+7 82944 249
 Coluna
 31268 1 0
 Coluna
-82944 185 0
+82944 248 0
 Linha
 8 13828 1
 Coluna
@@ -7967,15 +8023,19 @@ Linha
 Coluna
 30082 1 1
 Linha
+8 31268 2
+Coluna
+31268 2 1
+Linha
 8 31274 3
 Coluna
 31274 2 1
 Coluna
 31292 1 0
 Linha
-8 31286 2
+8 31286 4
 Coluna
-31286 1 1
+31286 3 0
 Coluna
 82944 1 0
 Linha
@@ -8051,7 +8111,7 @@ Linha
 Coluna
 75014 3 1
 Linha
-8 82944 198
+8 82944 263
 Coluna
 27772 1 0
 Coluna
@@ -8061,7 +8121,7 @@ Coluna
 Coluna
 31268 1 0
 Coluna
-82944 194 0
+82944 259 0
 Linha
 9 14404 4
 Coluna
@@ -8871,6 +8931,10 @@ Coluna
 Coluna
 30686 1 1
 Linha
+9 28540 1
+Coluna
+29788 1 1
+Linha
 9 28564 1
 Coluna
 28572 1 1
@@ -9379,7 +9443,7 @@ Coluna
 Coluna
 29524 2 0
 Linha
-9 29532 65
+9 29532 66
 Coluna
 27796 1 0
 Coluna
@@ -9403,7 +9467,7 @@ Coluna
 Coluna
 29526 2 0
 Coluna
-29532 35 0
+29532 36 0
 Coluna
 29534 9 0
 Coluna
@@ -9441,9 +9505,11 @@ Linha
 Coluna
 29566 1 1
 Linha
-9 29668 1
+9 29668 2
 Coluna
 29676 1 1
+Coluna
+29690 1 0
 Linha
 9 29676 1
 Coluna
@@ -9549,7 +9615,7 @@ Coluna
 Coluna
 29764 2 0
 Linha
-9 29780 81
+9 29780 83
 Coluna
 28612 2 0
 Coluna
@@ -9565,11 +9631,11 @@ Coluna
 Coluna
 29778 1 0
 Coluna
-29780 46 0
+29780 47 0
 Coluna
 29786 4 0
 Coluna
-29788 5 0
+29788 6 0
 Coluna
 29790 2 0
 Coluna
@@ -9851,11 +9917,15 @@ Coluna
 Coluna
 29818 1 0
 Linha
-9 29828 2
+9 29828 5
 Coluna
 29796 1 0
 Coluna
-29828 1 1
+29828 2 0
+Coluna
+29842 1 0
+Coluna
+29852 1 0
 Linha
 9 29836 2
 Coluna
@@ -9863,19 +9933,19 @@ Coluna
 Coluna
 29836 1 1
 Linha
-9 29842 2
+9 29842 3
 Coluna
-29828 2 1
+29828 3 1
 Linha
 9 29844 1
 Coluna
 29828 1 1
 Linha
-9 29852 4
+9 29852 7
 Coluna
 29828 1 1
 Coluna
-29852 3 0
+29852 6 0
 Linha
 9 30080 1
 Coluna
@@ -9885,13 +9955,19 @@ Linha
 Coluna
 30540 1 1
 Linha
-9 30260 4
+9 30260 5
 Coluna
 24796 1 1
 Coluna
 30252 2 0
 Coluna
 31116 1 0
+Coluna
+31420 1 0
+Linha
+9 30262 1
+Coluna
+31420 1 1
 Linha
 9 30266 2
 Coluna
@@ -9914,6 +9990,10 @@ Linha
 9 30336 1
 Coluna
 30658 1 1
+Linha
+9 30338 1
+Coluna
+30354 1 1
 Linha
 9 30340 9
 Coluna
@@ -9961,7 +10041,7 @@ Coluna
 Coluna
 30364 1 0
 Linha
-9 30356 8
+9 30356 9
 Coluna
 30340 1 0
 Coluna
@@ -9970,6 +10050,8 @@ Coluna
 30350 2 0
 Coluna
 30356 1 1
+Coluna
+30364 1 0
 Coluna
 30628 1 0
 Coluna
@@ -9991,11 +10073,13 @@ Coluna
 Coluna
 30384 1 0
 Linha
-9 30364 4
+9 30364 6
 Coluna
 30340 1 0
 Coluna
 30356 1 0
+Coluna
+30364 2 0
 Coluna
 31492 1 0
 Coluna
@@ -10035,15 +10119,19 @@ Coluna
 Coluna
 31708 1 1
 Linha
-9 30532 1
+9 30532 2
 Coluna
 30532 1 1
+Coluna
+30548 1 0
 Linha
 9 30546 1
 Coluna
 30546 1 1
 Linha
-9 30548 1
+9 30548 3
+Coluna
+30548 2 0
 Coluna
 30556 1 1
 Linha
@@ -10057,9 +10145,11 @@ Linha
 Coluna
 30558 1 1
 Linha
-9 30554 1
+9 30554 2
 Coluna
 30550 1 1
+Coluna
+30650 1 0
 Linha
 9 30558 2
 Coluna
@@ -10117,9 +10207,11 @@ Coluna
 Coluna
 31788 1 0
 Linha
-9 30630 26
+9 30630 27
 Coluna
 30356 1 0
+Coluna
+30556 1 0
 Coluna
 30630 13 0
 Coluna
@@ -10259,9 +10351,11 @@ Coluna
 Coluna
 30654 2 0
 Linha
-9 30650 22
+9 30650 23
 Coluna
 30628 3 0
+Coluna
+30636 1 0
 Coluna
 30642 1 0
 Coluna
@@ -10617,6 +10711,18 @@ Linha
 Coluna
 30834 2 1
 Linha
+9 30890 1
+Coluna
+30908 1 1
+Linha
+9 30906 1
+Coluna
+30902 1 1
+Linha
+9 30908 1
+Coluna
+30884 1 1
+Linha
 9 30912 3
 Coluna
 30048 1 1
@@ -10861,15 +10967,91 @@ Linha
 Coluna
 30946 2 1
 Linha
-9 30978 5
+9 30978 18
 Coluna
 30946 1 0
 Coluna
-30978 4 0
+30978 7 0
+Coluna
+30986 1 0
+Coluna
+30992 1 0
+Coluna
+30998 2 0
+Coluna
+31002 2 0
+Coluna
+31004 1 0
+Coluna
+32130 1 0
+Coluna
+82944 2 0
+Linha
+9 30980 1
+Coluna
+31004 1 1
+Linha
+9 30986 1
+Coluna
+31004 1 1
 Linha
 9 30990 2
 Coluna
 30990 2 1
+Linha
+9 30992 3
+Coluna
+30978 1 1
+Coluna
+30980 2 0
+Linha
+9 30994 4
+Coluna
+30994 1 1
+Coluna
+31006 2 0
+Coluna
+82944 1 0
+Linha
+9 30998 7
+Coluna
+30978 1 0
+Coluna
+30996 1 0
+Coluna
+30998 4 0
+Coluna
+82944 1 1
+Linha
+9 31002 2
+Coluna
+30978 1 1
+Coluna
+31002 1 0
+Linha
+9 31004 14
+Coluna
+30978 1 0
+Coluna
+30980 2 0
+Coluna
+30986 1 0
+Coluna
+30994 1 0
+Coluna
+31002 1 0
+Coluna
+31004 6 0
+Coluna
+32156 1 0
+Coluna
+82944 1 0
+Linha
+9 31006 4
+Coluna
+30980 2 0
+Coluna
+31006 2 0
 Linha
 9 31074 1
 Coluna
@@ -10891,13 +11073,25 @@ Linha
 Coluna
 31412 1 1
 Linha
+9 31394 1
+Coluna
+31394 1 1
+Linha
 9 31398 2
 Coluna
 31398 2 1
 Linha
+9 31420 2
+Coluna
+31420 2 1
+Linha
 9 31428 1
 Coluna
 31428 1 1
+Linha
+9 31490 1
+Coluna
+30554 1 1
 Linha
 9 31492 4
 Coluna
@@ -10919,7 +11113,9 @@ Linha
 Coluna
 31506 1 1
 Linha
-9 31508 1
+9 31508 2
+Coluna
+30260 1 0
 Coluna
 31220 1 1
 Linha
@@ -10935,9 +11131,11 @@ Coluna
 Coluna
 31508 1 0
 Linha
-9 31516 8
+9 31516 9
 Coluna
 30364 1 0
+Coluna
+31414 1 0
 Coluna
 31492 1 0
 Coluna
@@ -11045,6 +11243,10 @@ Coluna
 Coluna
 31836 2 0
 Linha
+9 31562 1
+Coluna
+31568 1 1
+Linha
 9 31692 1
 Coluna
 31700 1 1
@@ -11063,7 +11265,7 @@ Coluna
 Coluna
 31706 1 1
 Linha
-9 31708 4
+9 31708 6
 Coluna
 31708 1 1
 Coluna
@@ -11071,7 +11273,9 @@ Coluna
 Coluna
 31732 1 0
 Coluna
-31804 1 0
+31804 2 0
+Coluna
+82944 1 0
 Linha
 9 31710 3
 Coluna
@@ -11101,6 +11305,10 @@ Linha
 Coluna
 31166 1 1
 Linha
+9 31766 1
+Coluna
+31842 1 1
+Linha
 9 31776 3
 Coluna
 30646 1 0
@@ -11113,7 +11321,7 @@ Linha
 Coluna
 31804 2 1
 Linha
-9 31780 55
+9 31780 59
 Coluna
 29476 3 0
 Coluna
@@ -11127,7 +11335,7 @@ Coluna
 Coluna
 31516 1 0
 Coluna
-31780 6 0
+31780 8 0
 Coluna
 31782 9 0
 Coluna
@@ -11139,13 +11347,15 @@ Coluna
 Coluna
 31802 1 0
 Coluna
-31804 6 0
+31804 7 0
 Coluna
 31806 15 0
 Coluna
 31812 3 0
 Coluna
 31838 1 1
+Coluna
+82944 1 0
 Linha
 9 31782 50
 Coluna
@@ -11343,7 +11553,7 @@ Coluna
 Coluna
 31806 1 0
 Linha
-9 31804 138
+9 31804 145
 Coluna
 24892 1 0
 Coluna
@@ -11377,7 +11587,7 @@ Coluna
 Coluna
 31800 1 0
 Coluna
-31804 47 0
+31804 52 0
 Coluna
 31806 32 0
 Coluna
@@ -11385,7 +11595,7 @@ Coluna
 Coluna
 31836 2 0
 Coluna
-82944 1 0
+82944 3 0
 Linha
 9 31806 137
 Coluna
@@ -11723,7 +11933,7 @@ Coluna
 Coluna
 31836 5 0
 Linha
-9 31836 106
+9 31836 112
 Coluna
 28380 1 0
 Coluna
@@ -11733,7 +11943,7 @@ Coluna
 Coluna
 29508 1 0
 Coluna
-29532 4 0
+29532 5 0
 Coluna
 31260 1 0
 Coluna
@@ -11751,11 +11961,11 @@ Coluna
 Coluna
 31830 2 0
 Coluna
-31836 71 0
+31836 75 0
 Coluna
-31838 12 0
+31838 13 0
 Linha
-9 31838 27
+9 31838 28
 Coluna
 31806 4 0
 Coluna
@@ -11763,7 +11973,7 @@ Coluna
 Coluna
 31814 3 1
 Coluna
-31836 2 0
+31836 3 0
 Coluna
 31838 17 0
 Linha
@@ -11771,13 +11981,27 @@ Linha
 Coluna
 31810 2 1
 Linha
+9 31844 2
+Coluna
+29828 1 0
+Coluna
+31844 1 1
+Linha
 9 31846 1
 Coluna
 31830 1 1
 Linha
-9 31858 1
+9 31850 1
+Coluna
+82944 1 1
+Linha
+9 31858 3
 Coluna
 31838 1 1
+Coluna
+31858 1 0
+Coluna
+31868 1 0
 Linha
 9 31860 1
 Coluna
@@ -11786,6 +12010,10 @@ Linha
 9 31866 1
 Coluna
 31864 1 1
+Linha
+9 31868 1
+Coluna
+31868 1 1
 Linha
 9 31970 1
 Coluna
@@ -11999,17 +12227,51 @@ Linha
 Coluna
 32114 1 1
 Linha
+9 32128 1
+Coluna
+32128 1 1
+Linha
+9 32130 7
+Coluna
+30994 1 1
+Coluna
+32130 5 0
+Coluna
+82944 1 0
+Linha
 9 32132 1
 Coluna
 32146 1 1
 Linha
-9 32144 1
+9 32142 2
+Coluna
+32130 1 0
+Coluna
+32142 1 1
+Linha
+9 32144 2
+Coluna
+31004 1 0
 Coluna
 32138 1 1
 Linha
 9 32146 1
 Coluna
 30978 1 1
+Linha
+9 32150 4
+Coluna
+32130 1 0
+Coluna
+32150 2 0
+Coluna
+32156 1 0
+Linha
+9 32156 2
+Coluna
+32150 1 1
+Coluna
+32156 1 0
 Linha
 9 32948 1
 Coluna
@@ -12147,6 +12409,10 @@ Coluna
 Coluna
 33276 4 1
 Linha
+9 33296 1
+Coluna
+82944 1 1
+Linha
 9 34108 1
 Coluna
 29500 1 1
@@ -12174,6 +12440,10 @@ Linha
 9 34428 1
 Coluna
 34428 1 1
+Linha
+9 34454 1
+Coluna
+82944 1 1
 Linha
 9 35444 1
 Coluna
@@ -12737,6 +13007,14 @@ Coluna
 Coluna
 52572 1 0
 Linha
+9 52724 4
+Coluna
+52724 2 1
+Coluna
+52732 1 0
+Coluna
+82944 1 0
+Linha
 9 52732 1
 Coluna
 52732 1 1
@@ -12774,6 +13052,10 @@ Linha
 9 52852 2
 Coluna
 52852 2 1
+Linha
+9 53596 2
+Coluna
+82944 2 1
 Linha
 9 53862 1
 Coluna
@@ -12914,6 +13196,40 @@ Linha
 9 54040 1
 Coluna
 54034 1 1
+Linha
+9 54722 1
+Coluna
+54748 1 1
+Linha
+9 54740 1
+Coluna
+54740 1 1
+Linha
+9 54746 2
+Coluna
+54726 1 0
+Coluna
+54746 1 1
+Linha
+9 54748 5
+Coluna
+53568 1 0
+Coluna
+53574 1 0
+Coluna
+54726 1 0
+Coluna
+54748 1 1
+Coluna
+54750 1 0
+Linha
+9 54750 3
+Coluna
+53588 1 0
+Coluna
+54750 1 1
+Coluna
+82944 1 0
 Linha
 9 55012 1
 Coluna
@@ -13227,7 +13543,7 @@ Linha
 Coluna
 75898 1 1
 Linha
-9 82944 910
+9 82944 2318
 Coluna
 21758 1 0
 Coluna
@@ -13251,27 +13567,51 @@ Coluna
 Coluna
 30342 1 0
 Coluna
+30644 1 0
+Coluna
 30652 1 0
 Coluna
 30670 1 0
+Coluna
+30908 1 0
 Coluna
 30946 6 0
 Coluna
 30952 1 0
 Coluna
-30978 1 0
+30978 4 0
 Coluna
 30980 1 0
 Coluna
+30986 1 0
+Coluna
+30994 1 0
+Coluna
+30998 2 0
+Coluna
+31002 1 0
+Coluna
 31550 1 0
+Coluna
+31700 1 0
+Coluna
+31708 1 0
+Coluna
+31766 1 0
 Coluna
 31806 1 0
 Coluna
 31836 1 0
 Coluna
+31842 1 0
+Coluna
+31858 1 0
+Coluna
 32092 1 0
 Coluna
-82944 875 0
+32146 1 0
+Coluna
+82944 2267 0
 Linha
 10 14404 3
 Coluna
@@ -14031,6 +14371,10 @@ Linha
 Coluna
 30676 1 1
 Linha
+10 28532 1
+Coluna
+28532 1 1
+Linha
 10 28608 2
 Coluna
 28636 1 1
@@ -14051,9 +14395,11 @@ Linha
 Coluna
 28620 1 1
 Linha
-10 28628 11
+10 28628 12
 Coluna
 27764 1 0
+Coluna
+28532 1 0
 Coluna
 28612 2 0
 Coluna
@@ -14585,9 +14931,17 @@ Linha
 Coluna
 29566 1 1
 Linha
-10 29668 1
+10 29668 3
+Coluna
+29668 1 0
 Coluna
 29684 1 1
+Coluna
+82944 1 0
+Linha
+10 29670 1
+Coluna
+29670 1 1
 Linha
 10 29684 6
 Coluna
@@ -14721,7 +15075,7 @@ Coluna
 Coluna
 29764 2 0
 Linha
-10 29780 95
+10 29780 97
 Coluna
 27764 1 0
 Coluna
@@ -14735,7 +15089,7 @@ Coluna
 Coluna
 29772 3 0
 Coluna
-29780 55 0
+29780 57 0
 Coluna
 29784 1 0
 Coluna
@@ -14767,7 +15121,7 @@ Coluna
 Coluna
 29796 1 0
 Linha
-10 29788 58
+10 29788 60
 Coluna
 28632 1 0
 Coluna
@@ -14779,11 +15133,11 @@ Coluna
 Coluna
 29764 4 0
 Coluna
-29780 8 0
+29780 9 0
 Coluna
 29786 1 0
 Coluna
-29788 29 0
+29788 30 0
 Coluna
 29820 1 0
 Coluna
@@ -15123,9 +15477,13 @@ Linha
 Coluna
 30270 1 1
 Linha
-10 30260 1
+10 30260 2
 Coluna
-30260 1 1
+30260 2 1
+Linha
+10 30262 1
+Coluna
+30262 1 1
 Linha
 10 30264 1
 Coluna
@@ -15139,7 +15497,9 @@ Linha
 Coluna
 30302 1 1
 Linha
-10 30338 1
+10 30338 2
+Coluna
+30364 1 0
 Coluna
 31494 1 1
 Linha
@@ -15207,13 +15567,13 @@ Coluna
 Coluna
 31794 1 1
 Linha
-10 30356 3
+10 30356 5
 Coluna
 30340 1 1
 Coluna
 30348 1 0
 Coluna
-30356 1 0
+30356 3 0
 Linha
 10 30358 1
 Coluna
@@ -15235,11 +15595,13 @@ Coluna
 Coluna
 31502 1 0
 Linha
-10 30364 6
+10 30364 8
 Coluna
 30268 1 0
 Coluna
-30364 4 0
+30356 1 0
+Coluna
+30364 5 0
 Coluna
 31516 1 0
 Linha
@@ -15305,6 +15667,10 @@ Linha
 Coluna
 23636 1 1
 Linha
+10 30548 1
+Coluna
+30650 1 1
+Linha
 10 30550 2
 Coluna
 30262 1 0
@@ -15315,19 +15681,19 @@ Linha
 Coluna
 30650 1 1
 Linha
-10 30556 2
+10 30556 3
 Coluna
 30556 1 1
 Coluna
-31708 1 0
+31708 2 0
 Linha
-10 30558 3
+10 30558 4
 Coluna
 29956 1 0
 Coluna
 30546 1 0
 Coluna
-30558 1 1
+30558 2 0
 Linha
 10 30574 1
 Coluna
@@ -15447,7 +15813,7 @@ Coluna
 Coluna
 30682 1 0
 Linha
-10 30644 20
+10 30644 21
 Coluna
 28324 1 0
 Coluna
@@ -15463,7 +15829,7 @@ Coluna
 Coluna
 30646 1 0
 Coluna
-30652 2 0
+30652 3 0
 Coluna
 31788 1 0
 Coluna
@@ -15497,33 +15863,37 @@ Coluna
 Coluna
 31782 1 1
 Linha
-10 30650 20
+10 30650 24
 Coluna
 30372 1 0
 Coluna
 30546 1 0
 Coluna
-30630 1 0
+30630 2 0
 Coluna
 30642 1 0
 Coluna
 30644 4 0
 Coluna
-30650 9 0
+30650 10 0
 Coluna
-30652 1 0
+30652 2 0
+Coluna
+31516 1 0
 Coluna
 31794 1 0
 Coluna
 31802 1 0
 Linha
-10 30652 29
+10 30652 30
 Coluna
 29500 1 0
 Coluna
 30356 1 0
 Coluna
 30364 1 0
+Coluna
+30532 1 0
 Coluna
 30628 1 0
 Coluna
@@ -15843,6 +16213,14 @@ Coluna
 Coluna
 30842 1 1
 Linha
+10 30898 1
+Coluna
+82944 1 1
+Linha
+10 30908 1
+Coluna
+30908 1 1
+Linha
 10 30912 3
 Coluna
 30912 1 0
@@ -16123,27 +16501,93 @@ Linha
 Coluna
 30944 1 1
 Linha
-10 30978 8
+10 30978 13
 Coluna
 30946 6 0
 Coluna
-30978 2 0
+30976 1 0
+Coluna
+30978 5 0
+Coluna
+31004 1 0
 Linha
-10 30980 1
+10 30980 3
 Coluna
 30978 1 1
+Coluna
+30980 2 0
 Linha
-10 30984 1
+10 30982 2
+Coluna
+30982 1 0
+Coluna
+30998 1 1
+Linha
+10 30984 2
 Coluna
 30944 1 1
+Coluna
+30992 1 0
+Linha
+10 30986 1
+Coluna
+30986 1 1
 Linha
 10 30990 1
 Coluna
 31270 1 1
 Linha
-10 31004 1
+10 30992 4
+Coluna
+30994 1 1
+Coluna
+31004 1 0
+Coluna
+82944 2 0
+Linha
+10 30994 4
+Coluna
+30986 1 1
+Coluna
+30994 1 0
+Coluna
+30998 1 0
+Coluna
+82944 1 0
+Linha
+10 30996 1
+Coluna
+30982 1 1
+Linha
+10 30998 3
+Coluna
+30998 3 1
+Linha
+10 31002 3
+Coluna
+30982 2 0
+Coluna
+32154 1 1
+Linha
+10 31004 13
 Coluna
 30978 1 1
+Coluna
+30986 1 0
+Coluna
+30996 1 0
+Coluna
+31004 5 0
+Coluna
+31006 1 0
+Coluna
+32130 1 0
+Coluna
+82944 3 0
+Linha
+10 31006 1
+Coluna
+31006 1 1
 Linha
 10 31026 1
 Coluna
@@ -16245,11 +16689,19 @@ Linha
 Coluna
 31868 1 1
 Linha
+10 31392 1
+Coluna
+31420 1 1
+Linha
 10 31398 2
 Coluna
 30246 1 0
 Coluna
 31398 1 1
+Linha
+10 31408 1
+Coluna
+31392 1 1
 Linha
 10 31412 6
 Coluna
@@ -16261,15 +16713,21 @@ Coluna
 Coluna
 31420 1 0
 Linha
-10 31414 1
+10 31414 2
 Coluna
 30548 1 1
+Coluna
+31420 1 0
 Linha
-10 31420 3
+10 31420 6
 Coluna
 24508 1 0
 Coluna
-30268 1 0
+30240 1 0
+Coluna
+30268 2 0
+Coluna
+30338 1 0
 Coluna
 31420 1 1
 Linha
@@ -16343,13 +16801,13 @@ Coluna
 Coluna
 31806 1 0
 Linha
-10 31516 9
+10 31516 10
 Coluna
 31228 1 0
 Coluna
 31492 1 1
 Coluna
-31516 4 0
+31516 5 0
 Coluna
 31700 1 0
 Coluna
@@ -16417,9 +16875,11 @@ Coluna
 Coluna
 31548 1 1
 Linha
-10 31536 2
+10 31536 3
 Coluna
 31536 2 1
+Coluna
+31836 1 0
 Linha
 10 31540 6
 Coluna
@@ -16479,25 +16939,47 @@ Coluna
 Coluna
 31542 1 1
 Linha
-10 31684 2
+10 31568 1
+Coluna
+31844 1 1
+Linha
+10 31580 2
+Coluna
+31562 1 0
+Coluna
+31580 1 1
+Linha
+10 31684 3
+Coluna
+30532 1 0
 Coluna
 31684 1 1
 Coluna
 31836 1 0
 Linha
+10 31686 1
+Coluna
+30556 1 1
+Linha
+10 31696 1
+Coluna
+31780 1 1
+Linha
 10 31700 1
 Coluna
 31412 1 1
 Linha
-10 31706 2
+10 31706 3
+Coluna
+30548 1 0
 Coluna
 31706 2 1
 Linha
-10 31708 3
+10 31708 4
 Coluna
 31700 1 0
 Coluna
-31708 2 0
+31708 3 0
 Linha
 10 31710 1
 Coluna
@@ -16523,6 +17005,10 @@ Coluna
 Coluna
 31836 1 0
 Linha
+10 31766 1
+Coluna
+31766 1 1
+Linha
 10 31776 3
 Coluna
 30678 1 0
@@ -16537,13 +17023,13 @@ Coluna
 Coluna
 31778 1 0
 Linha
-10 31780 73
+10 31780 75
 Coluna
 28900 1 0
 Coluna
 29476 7 0
 Coluna
-30628 1 0
+30628 2 0
 Coluna
 30636 1 0
 Coluna
@@ -16562,6 +17048,8 @@ Coluna
 31794 1 0
 Coluna
 31796 6 0
+Coluna
+31798 1 0
 Coluna
 31804 4 0
 Coluna
@@ -16743,7 +17231,7 @@ Coluna
 Coluna
 31806 1 0
 Linha
-10 31804 122
+10 31804 125
 Coluna
 28924 1 0
 Coluna
@@ -16755,6 +17243,8 @@ Coluna
 Coluna
 29500 8 0
 Coluna
+30364 1 0
+Coluna
 30628 1 0
 Coluna
 30636 1 0
@@ -16763,7 +17253,7 @@ Coluna
 Coluna
 30654 1 0
 Coluna
-31780 16 0
+31780 17 0
 Coluna
 31788 1 0
 Coluna
@@ -16771,7 +17261,7 @@ Coluna
 Coluna
 31798 2 0
 Coluna
-31804 67 0
+31804 68 0
 Coluna
 31806 7 0
 Coluna
@@ -17195,17 +17685,25 @@ Coluna
 Coluna
 31838 3 0
 Linha
-10 31842 1
+10 31842 2
+Coluna
+30652 1 0
 Coluna
 31810 1 1
+Linha
+10 31844 1
+Coluna
+31844 1 1
 Linha
 10 31850 1
 Coluna
 31810 1 1
 Linha
-10 31868 2
+10 31868 3
 Coluna
 29564 1 0
+Coluna
+31850 1 0
 Coluna
 31858 1 1
 Linha
@@ -17240,6 +17738,10 @@ Linha
 10 32020 1
 Coluna
 32004 1 1
+Linha
+10 32048 1
+Coluna
+30998 1 1
 Linha
 10 32066 4
 Coluna
@@ -17465,17 +17967,51 @@ Linha
 Coluna
 32106 1 1
 Linha
-10 32130 1
+10 32130 14
 Coluna
-32142 1 1
+32130 9 0
+Coluna
+32136 1 0
+Coluna
+32142 2 0
+Coluna
+32150 1 0
+Coluna
+82944 1 0
+Linha
+10 32134 1
+Coluna
+30978 1 1
 Linha
 10 32138 1
 Coluna
 32138 1 1
 Linha
-10 32156 1
+10 32146 2
+Coluna
+30994 1 0
+Coluna
+32146 1 1
+Linha
+10 32150 3
+Coluna
+30978 1 0
+Coluna
+32150 1 1
+Coluna
+82944 1 0
+Linha
+10 32154 1
+Coluna
+32150 1 1
+Linha
+10 32156 4
 Coluna
 32130 1 1
+Coluna
+32150 1 0
+Coluna
+32156 2 0
 Linha
 10 33126 1
 Coluna
@@ -18211,7 +18747,9 @@ Linha
 Coluna
 52572 1 1
 Linha
-10 52732 1
+10 52732 2
+Coluna
+52724 1 0
 Coluna
 52732 1 1
 Linha
@@ -18230,6 +18768,36 @@ Linha
 10 52852 1
 Coluna
 52852 1 1
+Linha
+10 53570 1
+Coluna
+53596 1 1
+Linha
+10 53574 4
+Coluna
+53574 1 0
+Coluna
+53590 2 0
+Coluna
+54726 1 1
+Linha
+10 53588 2
+Coluna
+53588 1 0
+Coluna
+54748 1 1
+Linha
+10 53596 4
+Coluna
+53588 1 1
+Coluna
+53596 2 0
+Coluna
+54750 1 0
+Linha
+10 53598 1
+Coluna
+54748 1 1
 Linha
 10 53856 1
 Coluna
@@ -18362,6 +18930,32 @@ Coluna
 53938 1 1
 Coluna
 54002 1 0
+Linha
+10 54726 4
+Coluna
+53574 1 0
+Coluna
+54726 3 1
+Linha
+10 54746 1
+Coluna
+54748 1 1
+Linha
+10 54748 6
+Coluna
+53596 1 0
+Coluna
+54742 1 0
+Coluna
+54748 3 0
+Coluna
+82944 1 1
+Linha
+10 54750 4
+Coluna
+54746 1 0
+Coluna
+54750 3 0
 Linha
 10 54874 1
 Coluna
@@ -18659,7 +19253,7 @@ Coluna
 Coluna
 75872 1 1
 Linha
-10 82944 1073
+10 82944 2478
 Coluna
 22626 1 0
 Coluna
@@ -18687,21 +19281,47 @@ Coluna
 Coluna
 30958 2 0
 Coluna
-30978 1 0
+30978 2 0
 Coluna
 30984 1 0
 Coluna
+30994 1 0
+Coluna
+30998 2 0
+Coluna
+31006 1 0
+Coluna
+31274 1 0
+Coluna
 31282 1 0
 Coluna
+31696 1 0
+Coluna
+31780 1 0
+Coluna
 31796 1 0
+Coluna
+31804 2 0
 Coluna
 31828 1 0
 Coluna
 31838 1 0
 Coluna
+32130 1 0
+Coluna
+32134 1 0
+Coluna
+32146 1 0
+Coluna
+34454 1 0
+Coluna
 37460 1 0
 Coluna
-82944 1050 0
+52724 1 0
+Coluna
+53596 1 0
+Coluna
+82944 2439 0
 Linha
 11 14404 3
 Coluna
@@ -19509,6 +20129,10 @@ Coluna
 Coluna
 28636 1 1
 Linha
+11 28532 1
+Coluna
+28540 1 1
+Linha
 11 28612 3
 Coluna
 27764 1 1
@@ -20035,11 +20659,11 @@ Linha
 Coluna
 29546 2 1
 Linha
-11 29684 5
+11 29684 6
 Coluna
 29668 1 0
 Coluna
-29684 3 1
+29684 4 0
 Coluna
 29694 1 0
 Linha
@@ -20049,9 +20673,11 @@ Coluna
 Coluna
 29692 1 1
 Linha
-11 29694 1
+11 29694 2
 Coluna
 28804 1 1
+Coluna
+29668 1 0
 Linha
 11 29700 2
 Coluna
@@ -20161,7 +20787,7 @@ Coluna
 Coluna
 33244 1 0
 Linha
-11 29780 86
+11 29780 87
 Coluna
 27772 1 0
 Coluna
@@ -20175,7 +20801,7 @@ Coluna
 Coluna
 29772 4 0
 Coluna
-29780 55 0
+29780 56 0
 Coluna
 29786 1 0
 Coluna
@@ -20423,9 +21049,9 @@ Linha
 Coluna
 29826 1 1
 Linha
-11 29828 2
+11 29828 3
 Coluna
-29828 2 1
+29828 3 1
 Linha
 11 29836 3
 Coluna
@@ -20435,9 +21061,11 @@ Coluna
 Coluna
 29836 1 0
 Linha
-11 29842 1
+11 29842 2
 Coluna
 29828 1 1
+Coluna
+29842 1 0
 Linha
 11 29844 1
 Coluna
@@ -20447,11 +21075,11 @@ Linha
 Coluna
 29852 1 1
 Linha
-11 29852 3
+11 29852 6
 Coluna
 29812 1 0
 Coluna
-29852 2 1
+29852 5 0
 Linha
 11 30076 1
 Coluna
@@ -20519,9 +21147,11 @@ Linha
 Coluna
 30260 1 1
 Linha
-11 30268 2
+11 30268 3
 Coluna
 30244 1 0
+Coluna
+31420 1 0
 Coluna
 31684 1 1
 Linha
@@ -20607,21 +21237,27 @@ Coluna
 Coluna
 30628 1 0
 Linha
-11 30362 6
+11 30362 7
 Coluna
 30354 2 0
 Coluna
 30356 3 0
 Coluna
 31204 1 0
+Coluna
+31516 1 0
 Linha
-11 30364 5
+11 30364 9
 Coluna
 30356 1 0
 Coluna
 30358 1 0
 Coluna
+30364 3 0
+Coluna
 30366 1 0
+Coluna
+31508 1 0
 Coluna
 31516 2 0
 Linha
@@ -20683,7 +21319,9 @@ Coluna
 Coluna
 30550 1 0
 Linha
-11 30532 1
+11 30532 2
+Coluna
+30548 1 0
 Coluna
 30556 1 1
 Linha
@@ -20697,7 +21335,11 @@ Coluna
 Coluna
 31410 1 0
 Linha
-11 30548 1
+11 30548 3
+Coluna
+30532 1 0
+Coluna
+30540 1 0
 Coluna
 30550 1 1
 Linha
@@ -20705,11 +21347,13 @@ Linha
 Coluna
 30548 1 1
 Linha
-11 30556 2
+11 30556 3
 Coluna
 30556 1 1
 Coluna
 31708 1 0
+Coluna
+82944 1 0
 Linha
 11 30574 1
 Coluna
@@ -20741,7 +21385,7 @@ Coluna
 Coluna
 30646 1 0
 Linha
-11 30628 28
+11 30628 29
 Coluna
 29982 1 0
 Coluna
@@ -20771,7 +21415,7 @@ Coluna
 Coluna
 31782 1 0
 Coluna
-31804 1 0
+31804 2 0
 Coluna
 31806 1 0
 Linha
@@ -20909,7 +21553,7 @@ Coluna
 Coluna
 30654 2 0
 Linha
-11 30650 24
+11 30650 25
 Coluna
 30074 1 0
 Coluna
@@ -20921,7 +21565,7 @@ Coluna
 Coluna
 30644 2 0
 Coluna
-30650 7 0
+30650 8 0
 Coluna
 30652 7 0
 Coluna
@@ -21285,6 +21929,30 @@ Coluna
 Coluna
 30842 2 0
 Linha
+11 30884 2
+Coluna
+30884 1 1
+Coluna
+82944 1 0
+Linha
+11 30898 1
+Coluna
+30898 1 1
+Linha
+11 30902 1
+Coluna
+30882 1 1
+Linha
+11 30906 2
+Coluna
+30898 1 0
+Coluna
+30906 1 1
+Linha
+11 30908 1
+Coluna
+30908 1 1
+Linha
 11 30912 2
 Coluna
 30914 1 1
@@ -21545,21 +22213,85 @@ Linha
 Coluna
 30990 1 1
 Linha
-11 30978 6
+11 30978 13
 Coluna
 30946 1 0
 Coluna
-30978 3 1
+30978 5 0
+Coluna
+30980 1 0
+Coluna
+31002 1 0
+Coluna
+31004 2 0
 Coluna
 32130 2 0
+Coluna
+82944 1 0
+Linha
+11 30980 2
+Coluna
+31006 1 1
+Coluna
+82944 1 0
 Linha
 11 30984 1
 Coluna
 30946 1 1
 Linha
-11 30996 1
+11 30986 2
+Coluna
+30978 1 0
+Coluna
+31004 1 1
+Linha
+11 30992 2
+Coluna
+30992 2 1
+Linha
+11 30994 2
+Coluna
+30994 2 1
+Linha
+11 30996 2
 Coluna
 30964 1 1
+Coluna
+31004 1 0
+Linha
+11 30998 5
+Coluna
+30976 1 0
+Coluna
+30978 1 0
+Coluna
+30998 1 1
+Coluna
+31002 1 0
+Coluna
+31004 1 0
+Linha
+11 31002 2
+Coluna
+31002 2 1
+Linha
+11 31004 18
+Coluna
+30978 3 0
+Coluna
+30986 1 0
+Coluna
+30994 1 0
+Coluna
+31002 1 0
+Coluna
+31004 12 0
+Linha
+11 31006 2
+Coluna
+30992 1 0
+Coluna
+31004 1 1
 Linha
 11 31024 1
 Coluna
@@ -21659,11 +22391,11 @@ Linha
 Coluna
 31404 1 1
 Linha
-11 31420 2
+11 31420 5
 Coluna
 31396 1 0
 Coluna
-31420 1 1
+31420 4 0
 Linha
 11 31428 4
 Coluna
@@ -21733,17 +22465,19 @@ Coluna
 Coluna
 31516 1 0
 Linha
-11 31516 10
+11 31516 12
 Coluna
 30358 1 0
 Coluna
 30652 1 0
 Coluna
+31490 1 0
+Coluna
 31516 4 0
 Coluna
 31780 1 0
 Coluna
-31804 2 0
+31804 3 0
 Coluna
 31836 1 0
 Linha
@@ -21877,11 +22611,11 @@ Coluna
 Coluna
 31706 1 1
 Linha
-11 31708 3
+11 31708 4
 Coluna
 31230 1 0
 Coluna
-31708 2 0
+31708 3 0
 Linha
 11 31714 1
 Coluna
@@ -21935,7 +22669,7 @@ Coluna
 Coluna
 31804 2 0
 Linha
-11 31780 75
+11 31780 76
 Coluna
 28916 1 0
 Coluna
@@ -21963,7 +22697,7 @@ Coluna
 Coluna
 31796 3 0
 Coluna
-31804 16 0
+31804 17 0
 Coluna
 31806 3 0
 Coluna
@@ -22139,7 +22873,7 @@ Coluna
 Coluna
 31828 1 1
 Linha
-11 31804 128
+11 31804 137
 Coluna
 29492 1 0
 Coluna
@@ -22165,13 +22899,15 @@ Coluna
 Coluna
 31798 5 0
 Coluna
-31804 72 0
+31804 80 0
 Coluna
 31806 11 0
 Coluna
 31836 1 0
 Coluna
 31868 1 0
+Coluna
+82944 1 0
 Linha
 11 31806 111
 Coluna
@@ -22467,7 +23203,7 @@ Coluna
 Coluna
 31836 4 0
 Linha
-11 31836 109
+11 31836 111
 Coluna
 28948 1 0
 Coluna
@@ -22503,13 +23239,13 @@ Coluna
 Coluna
 31834 1 0
 Coluna
-31836 63 0
+31836 64 0
 Coluna
-31838 1 0
+31838 2 0
 Coluna
 82944 2 0
 Linha
-11 31838 42
+11 31838 44
 Coluna
 29508 1 0
 Coluna
@@ -22531,17 +23267,17 @@ Coluna
 Coluna
 31834 1 0
 Coluna
-31836 22 0
+31836 23 0
 Coluna
-31838 3 0
+31838 4 0
 Linha
 11 31864 1
 Coluna
 30652 1 1
 Linha
-11 31868 3
+11 31868 5
 Coluna
-31868 3 1
+31868 5 1
 Linha
 11 31970 2
 Coluna
@@ -22821,13 +23557,23 @@ Linha
 Coluna
 32114 1 1
 Linha
-11 32130 4
+11 32128 2
+Coluna
+32128 1 1
+Coluna
+32130 1 0
+Linha
+11 32130 11
 Coluna
 30978 2 0
 Coluna
 31004 1 1
 Coluna
-32130 1 0
+32130 6 0
+Coluna
+32150 1 0
+Coluna
+32154 1 0
 Linha
 11 32138 1
 Coluna
@@ -22837,9 +23583,29 @@ Linha
 Coluna
 82944 1 1
 Linha
-11 32154 1
+11 32144 2
+Coluna
+31004 1 0
+Coluna
+32144 1 1
+Linha
+11 32150 1
 Coluna
 32156 1 1
+Linha
+11 32154 4
+Coluna
+31004 1 0
+Coluna
+32130 2 0
+Coluna
+32156 1 1
+Linha
+11 32156 2
+Coluna
+32156 1 1
+Coluna
+82944 1 0
 Linha
 11 32932 1
 Coluna
@@ -22934,6 +23700,10 @@ Linha
 11 33276 2
 Coluna
 33276 2 1
+Linha
+11 33296 1
+Coluna
+33296 1 1
 Linha
 11 34108 1
 Coluna
@@ -23555,6 +24325,32 @@ Linha
 Coluna
 52852 1 1
 Linha
+11 53568 1
+Coluna
+53596 1 1
+Linha
+11 53574 1
+Coluna
+53574 1 1
+Linha
+11 53588 4
+Coluna
+53570 1 0
+Coluna
+53574 1 1
+Coluna
+53588 1 0
+Coluna
+54748 1 0
+Linha
+11 53596 3
+Coluna
+53596 1 0
+Coluna
+54726 1 0
+Coluna
+54746 1 1
+Linha
 11 53856 1
 Coluna
 53882 1 1
@@ -23692,6 +24488,44 @@ Linha
 11 54034 1
 Coluna
 54034 1 1
+Linha
+11 54722 1
+Coluna
+54746 1 1
+Linha
+11 54726 3
+Coluna
+54746 1 0
+Coluna
+54748 1 1
+Coluna
+54750 1 0
+Linha
+11 54740 1
+Coluna
+53588 1 1
+Linha
+11 54746 2
+Coluna
+53588 1 1
+Coluna
+54722 1 0
+Linha
+11 54748 6
+Coluna
+53570 1 0
+Coluna
+53596 1 1
+Coluna
+54722 1 0
+Coluna
+54726 1 0
+Coluna
+54748 2 0
+Linha
+11 54750 1
+Coluna
+54750 1 1
 Linha
 11 54850 2
 Coluna
@@ -23969,7 +24803,7 @@ Linha
 Coluna
 75886 1 1
 Linha
-11 82944 1069
+11 82944 2488
 Coluna
 23748 1 0
 Coluna
@@ -23980,6 +24814,8 @@ Coluna
 24916 1 0
 Coluna
 28660 1 0
+Coluna
+29670 1 0
 Coluna
 29788 1 0
 Coluna
@@ -23993,17 +24829,31 @@ Coluna
 Coluna
 30388 1 0
 Coluna
+30650 1 0
+Coluna
 30668 1 0
 Coluna
 30684 1 0
 Coluna
+30890 1 0
+Coluna
 30946 1 0
 Coluna
-30978 1 0
+30978 3 0
+Coluna
+30992 1 0
+Coluna
+30994 1 0
+Coluna
+30998 1 0
 Coluna
 31234 1 0
 Coluna
 31266 1 0
+Coluna
+31706 1 0
+Coluna
+31780 1 0
 Coluna
 31804 1 0
 Coluna
@@ -24011,11 +24861,17 @@ Coluna
 Coluna
 31842 1 0
 Coluna
+32156 1 0
+Coluna
+33296 1 0
+Coluna
 52436 1 0
+Coluna
+53596 1 0
 Coluna
 53978 1 0
 Coluna
-82944 1044 0
+82944 2450 0
 Linha
 12 14404 1
 Coluna
@@ -25349,7 +26205,7 @@ Coluna
 Coluna
 29532 4 0
 Linha
-12 29532 82
+12 29532 83
 Coluna
 28380 1 0
 Coluna
@@ -25391,7 +26247,7 @@ Coluna
 Coluna
 34124 1 0
 Coluna
-82944 1 0
+82944 2 0
 Linha
 12 29534 14
 Coluna
@@ -25431,11 +26287,17 @@ Linha
 Coluna
 29668 1 1
 Linha
+12 29670 1
+Coluna
+29780 1 1
+Linha
 12 29676 1
 Coluna
 29692 1 1
 Linha
-12 29684 9
+12 29684 10
+Coluna
+28628 1 0
 Coluna
 28828 1 0
 Coluna
@@ -25445,11 +26307,21 @@ Coluna
 Coluna
 29780 1 0
 Linha
+12 29690 1
+Coluna
+29694 1 1
+Linha
 12 29692 6
 Coluna
 28828 1 0
 Coluna
 29692 5 0
+Linha
+12 29694 2
+Coluna
+29684 1 0
+Coluna
+29694 1 1
 Linha
 12 29700 4
 Coluna
@@ -25563,7 +26435,7 @@ Linha
 Coluna
 29778 2 1
 Linha
-12 29780 85
+12 29780 87
 Coluna
 27748 1 0
 Coluna
@@ -25583,13 +26455,15 @@ Coluna
 Coluna
 28948 1 0
 Coluna
+29668 1 0
+Coluna
 29764 8 0
 Coluna
 29766 1 0
 Coluna
 29772 3 0
 Coluna
-29780 42 0
+29780 43 0
 Coluna
 29786 2 0
 Coluna
@@ -25641,7 +26515,7 @@ Coluna
 Coluna
 32084 1 0
 Linha
-12 29788 65
+12 29788 66
 Coluna
 27772 1 0
 Coluna
@@ -25677,7 +26551,7 @@ Coluna
 Coluna
 29820 1 0
 Coluna
-82944 1 0
+82944 2 0
 Linha
 12 29790 3
 Coluna
@@ -25927,15 +26801,21 @@ Linha
 Coluna
 29820 1 1
 Linha
+12 29842 2
+Coluna
+29842 2 1
+Linha
 12 29844 2
 Coluna
 29844 2 1
 Linha
-12 29852 3
+12 29852 4
 Coluna
 29820 1 0
 Coluna
 29852 2 0
+Coluna
+82944 1 0
 Linha
 12 29948 1
 Coluna
@@ -25981,6 +26861,10 @@ Linha
 Coluna
 30972 1 1
 Linha
+12 30240 1
+Coluna
+30262 1 1
+Linha
 12 30246 1
 Coluna
 30266 1 1
@@ -25997,9 +26881,11 @@ Coluna
 Coluna
 30554 1 0
 Linha
-12 30268 1
+12 30268 2
 Coluna
 30244 1 1
+Coluna
+30268 1 0
 Linha
 12 30270 1
 Coluna
@@ -26009,11 +26895,13 @@ Linha
 Coluna
 30584 1 1
 Linha
-12 30338 4
+12 30338 5
 Coluna
 30338 1 0
 Coluna
 30352 1 1
+Coluna
+30362 1 0
 Coluna
 30634 1 0
 Coluna
@@ -26055,7 +26943,9 @@ Coluna
 Coluna
 31488 1 1
 Linha
-12 30354 2
+12 30354 3
+Coluna
+30338 1 0
 Coluna
 30366 1 1
 Coluna
@@ -26089,7 +26979,9 @@ Coluna
 Coluna
 30362 1 1
 Linha
-12 30364 2
+12 30364 3
+Coluna
+30338 1 0
 Coluna
 30364 1 0
 Coluna
@@ -26145,6 +27037,16 @@ Linha
 Coluna
 30554 1 1
 Linha
+12 30532 2
+Coluna
+30532 1 0
+Coluna
+30558 1 1
+Linha
+12 30540 1
+Coluna
+31684 1 1
+Linha
 12 30546 1
 Coluna
 30558 1 1
@@ -26167,9 +27069,17 @@ Coluna
 Coluna
 31710 2 0
 Linha
-12 30558 1
+12 30558 4
 Coluna
 30552 1 1
+Coluna
+30558 1 0
+Coluna
+82944 2 0
+Linha
+12 30564 1
+Coluna
+82944 1 1
 Linha
 12 30590 1
 Coluna
@@ -26249,7 +27159,9 @@ Linha
 Coluna
 30642 1 1
 Linha
-12 30636 9
+12 30636 10
+Coluna
+30564 1 0
 Coluna
 30628 2 0
 Coluna
@@ -26375,7 +27287,7 @@ Coluna
 Coluna
 30676 1 0
 Linha
-12 30652 51
+12 30652 53
 Coluna
 27772 1 0
 Coluna
@@ -26401,7 +27313,7 @@ Coluna
 Coluna
 30646 6 0
 Coluna
-30650 2 0
+30650 3 0
 Coluna
 30652 9 0
 Coluna
@@ -26410,6 +27322,8 @@ Coluna
 30660 1 0
 Coluna
 30684 1 1
+Coluna
+31686 1 0
 Coluna
 31782 1 0
 Coluna
@@ -26807,6 +27721,18 @@ Linha
 Coluna
 30006 1 1
 Linha
+12 30882 1
+Coluna
+30906 1 1
+Linha
+12 30898 1
+Coluna
+30898 1 1
+Linha
+12 30908 1
+Coluna
+30906 1 1
+Linha
 12 30912 6
 Coluna
 30912 4 0
@@ -27071,33 +27997,117 @@ Linha
 Coluna
 30974 1 1
 Linha
-12 30976 1
+12 30976 4
 Coluna
 30944 1 1
+Coluna
+30976 1 0
+Coluna
+31004 1 0
+Coluna
+82944 1 0
 Linha
-12 30978 6
+12 30978 13
 Coluna
 30946 1 0
 Coluna
 30952 1 0
 Coluna
-30978 2 0
+30978 5 0
 Coluna
-30984 1 0
+30984 2 0
 Coluna
 30992 1 1
+Coluna
+30998 1 0
+Coluna
+31004 1 0
+Coluna
+32130 1 0
+Linha
+12 30980 5
+Coluna
+30998 1 1
+Coluna
+31004 2 0
+Coluna
+82944 2 0
+Linha
+12 30982 2
+Coluna
+30978 1 0
+Coluna
+82944 1 1
+Linha
+12 30986 7
+Coluna
+30978 2 0
+Coluna
+30986 1 0
+Coluna
+31004 2 0
+Coluna
+82944 2 1
 Linha
 12 30990 1
 Coluna
 30958 1 1
 Linha
-12 30992 1
+12 30992 3
 Coluna
 30946 1 1
+Coluna
+30992 1 0
+Coluna
+30998 1 0
 Linha
-12 30994 1
+12 30994 4
 Coluna
 29844 1 1
+Coluna
+30980 1 0
+Coluna
+31004 1 0
+Coluna
+82944 1 0
+Linha
+12 30998 11
+Coluna
+30986 1 0
+Coluna
+30992 1 0
+Coluna
+30994 1 0
+Coluna
+30998 4 0
+Coluna
+31004 2 0
+Coluna
+32130 1 0
+Coluna
+32150 1 0
+Linha
+12 31002 4
+Coluna
+30978 1 0
+Coluna
+30986 1 0
+Coluna
+31002 1 0
+Coluna
+31004 1 1
+Linha
+12 31004 9
+Coluna
+30992 1 0
+Coluna
+31004 5 0
+Coluna
+82944 3 0
+Linha
+12 31006 1
+Coluna
+82944 1 1
 Linha
 12 31074 1
 Coluna
@@ -27179,6 +28189,10 @@ Linha
 Coluna
 31868 1 1
 Linha
+12 31394 1
+Coluna
+82944 1 1
+Linha
 12 31404 1
 Coluna
 28826 1 1
@@ -27192,6 +28206,14 @@ Coluna
 31130 1 0
 Coluna
 31418 1 1
+Linha
+12 31420 4
+Coluna
+31394 1 0
+Coluna
+31408 1 1
+Coluna
+31420 2 0
 Linha
 12 31428 1
 Coluna
@@ -27239,7 +28261,7 @@ Coluna
 Coluna
 31514 2 0
 Linha
-12 31516 10
+12 31516 12
 Coluna
 31492 1 0
 Coluna
@@ -27247,7 +28269,7 @@ Coluna
 Coluna
 31514 1 0
 Coluna
-31516 1 0
+31516 3 0
 Coluna
 31518 1 0
 Coluna
@@ -27373,11 +28395,21 @@ Coluna
 Coluna
 31834 1 0
 Linha
-12 31700 3
+12 31684 1
+Coluna
+31684 1 1
+Linha
+12 31696 1
+Coluna
+31696 1 1
+Linha
+12 31700 4
 Coluna
 31412 1 0
 Coluna
 31706 2 1
+Coluna
+82944 1 0
 Linha
 12 31702 1
 Coluna
@@ -27389,11 +28421,13 @@ Coluna
 Coluna
 31706 1 1
 Linha
-12 31708 3
+12 31708 4
 Coluna
 30530 1 1
 Coluna
 31706 1 0
+Coluna
+31708 1 0
 Coluna
 31710 1 0
 Linha
@@ -27423,7 +28457,7 @@ Coluna
 Coluna
 31802 1 0
 Linha
-12 31780 55
+12 31780 56
 Coluna
 29496 1 0
 Coluna
@@ -27437,7 +28471,7 @@ Coluna
 Coluna
 31518 1 0
 Coluna
-31780 3 0
+31780 4 0
 Coluna
 31782 6 0
 Coluna
@@ -27587,7 +28621,7 @@ Coluna
 Coluna
 31834 1 0
 Linha
-12 31798 49
+12 31798 50
 Coluna
 30626 1 0
 Coluna
@@ -27620,6 +28654,8 @@ Coluna
 31814 3 0
 Coluna
 31822 1 0
+Coluna
+82944 1 0
 Linha
 12 31800 11
 Coluna
@@ -27659,7 +28695,7 @@ Coluna
 Coluna
 31804 2 0
 Linha
-12 31804 102
+12 31804 108
 Coluna
 29474 1 0
 Coluna
@@ -27689,7 +28725,9 @@ Coluna
 Coluna
 31512 1 0
 Coluna
-31780 4 0
+31516 1 0
+Coluna
+31780 5 0
 Coluna
 31782 4 0
 Coluna
@@ -27705,7 +28743,7 @@ Coluna
 Coluna
 31802 4 0
 Coluna
-31804 15 0
+31804 19 0
 Coluna
 31806 42 0
 Coluna
@@ -28009,7 +29047,7 @@ Coluna
 Coluna
 31838 1 0
 Linha
-12 31836 100
+12 31836 101
 Coluna
 28956 1 0
 Coluna
@@ -28067,7 +29105,7 @@ Coluna
 Coluna
 31834 7 0
 Coluna
-31836 15 0
+31836 16 0
 Coluna
 31838 13 0
 Linha
@@ -28097,6 +29135,12 @@ Coluna
 Coluna
 31838 25 0
 Linha
+12 31842 2
+Coluna
+31580 1 0
+Coluna
+31842 1 1
+Linha
 12 31860 1
 Coluna
 31866 1 1
@@ -28120,6 +29164,10 @@ Coluna
 29724 1 0
 Coluna
 32012 1 1
+Linha
+12 32048 1
+Coluna
+32048 1 1
 Linha
 12 32066 10
 Coluna
@@ -28383,19 +29431,47 @@ Linha
 Coluna
 32120 1 1
 Linha
-12 32128 2
+12 32128 3
+Coluna
+32128 1 0
 Coluna
 32144 1 0
 Coluna
 32154 1 1
 Linha
-12 32130 1
+12 32130 9
 Coluna
 31240 1 1
+Coluna
+32130 5 0
+Coluna
+32144 1 0
+Coluna
+32154 1 0
+Coluna
+82944 1 0
 Linha
-12 32136 1
+12 32136 2
 Coluna
 32104 1 1
+Coluna
+82944 1 0
+Linha
+12 32144 1
+Coluna
+30992 1 1
+Linha
+12 32146 1
+Coluna
+32130 1 1
+Linha
+12 32150 1
+Coluna
+30998 1 1
+Linha
+12 32156 1
+Coluna
+32144 1 1
 Linha
 12 33126 1
 Coluna
@@ -28500,6 +29576,10 @@ Linha
 12 33276 2
 Coluna
 33276 2 1
+Linha
+12 33296 2
+Coluna
+33296 2 1
 Linha
 12 34340 2
 Coluna
@@ -29099,6 +30179,34 @@ Coluna
 Coluna
 52844 2 0
 Linha
+12 53570 2
+Coluna
+53570 1 1
+Coluna
+53596 1 0
+Linha
+12 53588 1
+Coluna
+53594 1 1
+Linha
+12 53590 2
+Coluna
+53598 1 0
+Coluna
+54748 1 1
+Linha
+12 53594 1
+Coluna
+53588 1 1
+Linha
+12 53596 4
+Coluna
+53596 2 0
+Coluna
+54748 1 1
+Coluna
+54750 1 0
+Linha
 12 53856 1
 Coluna
 53880 1 1
@@ -29262,6 +30370,24 @@ Linha
 12 54034 1
 Coluna
 54040 1 1
+Linha
+12 54726 1
+Coluna
+54748 1 1
+Linha
+12 54742 1
+Coluna
+54748 1 1
+Linha
+12 54748 1
+Coluna
+54748 1 1
+Linha
+12 54750 3
+Coluna
+54748 1 0
+Coluna
+54750 2 1
 Linha
 12 55012 1
 Coluna
@@ -29565,7 +30691,7 @@ Linha
 Coluna
 75892 1 1
 Linha
-12 82944 1020
+12 82944 2426
 Coluna
 22586 1 0
 Coluna
@@ -29579,6 +30705,8 @@ Coluna
 Coluna
 29524 1 0
 Coluna
+29694 1 0
+Coluna
 29788 1 0
 Coluna
 29812 6 0
@@ -29591,9 +30719,19 @@ Coluna
 Coluna
 30102 1 0
 Coluna
+30558 1 0
+Coluna
+30986 1 0
+Coluna
+30992 1 0
+Coluna
+31004 1 0
+Coluna
 31286 1 0
 Coluna
 31520 1 0
+Coluna
+31536 1 0
 Coluna
 31542 1 0
 Coluna
@@ -29611,9 +30749,17 @@ Coluna
 Coluna
 31974 1 0
 Coluna
+32048 1 0
+Coluna
 32098 1 0
 Coluna
 32104 1 0
 Coluna
-82944 987 0
+32154 1 0
+Coluna
+53596 1 0
+Coluna
+54740 1 0
+Coluna
+82944 2383 0
 Fim

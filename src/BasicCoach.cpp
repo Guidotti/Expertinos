@@ -132,6 +132,7 @@ void BasicCoach::mainLoopNormal( )
 
       // just substitute some players (define your own methods to
       // determine which player types should be substituted )
+
       substitutePlayer(  2, 1 );  // substitute player 2 to type 1
       substitutePlayer(  3, 2 );
       substitutePlayer(  4, 3 );
@@ -142,6 +143,7 @@ void BasicCoach::mainLoopNormal( )
       substitutePlayer(  9, 8 );
       substitutePlayer( 10, 9 );
       substitutePlayer( 11, 10 );
+
       bSubstituted = true;
     }
   

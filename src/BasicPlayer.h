@@ -119,6 +119,7 @@ class Aprendizagem_Reforco
 	};
 	typedef noh* noChain;
 
+	int CA_numActions;
 	int CA_possession;
 	noChain chainAction[10];
 	noh* ultimoNo[10];
