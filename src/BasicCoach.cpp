@@ -26,7 +26,7 @@ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
 CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*/
+ */
 
 /*! \file BasicCoach.cpp
 <pre>
@@ -43,14 +43,14 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 <b>Date</b>             <b>Author</b>          <b>Comment</b>
 03/03/2001        Jelle Kok       Initial version created
 </pre>
-*/
+ */
 
 #include"BasicCoach.h"
 #include"Parse.h"
 #ifdef WIN32
-  #include <windows.h>
+#include <windows.h>
 #else
-  #include <sys/poll.h>
+#include <sys/poll.h>
 #endif
 
 extern Logger Log; /*!< This is a reference to the Logger to write loginfo to*/
@@ -65,23 +65,23 @@ extern Logger Log; /*!< This is a reference to the Logger to write loginfo to*/
    \param isTrainer indicates whether the coach is a trainer (offline coach)
           or an online coach (used during the match). */
 BasicCoach::BasicCoach( ActHandler* act, WorldModel *wm, ServerSettings *ss,
-      char* strTeamName, double dVersion, bool isTrainer )
+		char* strTeamName, double dVersion, bool isTrainer )
 
 {
-  char str[MAX_MSG];
+	char str[MAX_MSG];
 
-  ACT       = act;
-  WM        = wm;
-  SS        = ss;
-  bContLoop = true;
-  WM->setTeamName( strTeamName );
+	ACT       = act;
+	WM        = wm;
+	SS        = ss;
+	bContLoop = true;
+	WM->setTeamName( strTeamName );
 
-  if( !isTrainer )
-    sprintf( str, "(init %s (version %f))", strTeamName, dVersion );
-  else
-    sprintf( str, "(init (version %f))", dVersion );
+	if( !isTrainer )
+		sprintf( str, "(init %s (version %f))", strTeamName, dVersion );
+	else
+		sprintf( str, "(init (version %f))", dVersion );
 
-   ACT->sendMessage( str );
+	ACT->sendMessage( str );
 }
 
 BasicCoach::~BasicCoach( )
@@ -93,67 +93,65 @@ BasicCoach::~BasicCoach( )
 void BasicCoach::mainLoopNormal( )
 {
 #ifdef WIN32
-  Sleep( 1000 );
+	Sleep( 1000 );
 #else
-  poll( 0, 0, 1000 );
+	poll( 0, 0, 1000 );
 #endif
 
-  bool bSubstituted   = false;
-  ACT->sendMessageDirect( "(eye on)" );
+	bool bSubstituted   = false;
+	ACT->sendMessageDirect( "(eye on)" );
 
 #ifdef WIN32
-  Sleep( 1000 );
+	Sleep( 1000 );
 #else
-  poll( 0, 0, 1000 );
+	poll( 0, 0, 1000 );
 #endif
 
-  while( WM->getPlayMode() != PM_TIME_OVER  && bContLoop )
-  {
-    Log.log( 1, "in loop %d %d %f",
-             WM->getTimeLastSeeGlobalMessage().getTime(),
-             bSubstituted,
-             WM->isConfidenceGood( OBJECT_TEAMMATE_11 )) ;
-    if(  WM->waitForNewInformation() == false )
-    {
-      printf( "Shutting down coach\n" );
-      bContLoop = false;
-    }
-    else if( WM->getTimeLastSeeGlobalMessage().getTime() == 0 &&
-             bSubstituted == false &&
-             WM->isConfidenceGood( OBJECT_TEAMMATE_11 ))
-    {
-      // read (and write) all player_type information 
-      for( int i = 0 ; i < MAX_HETERO_PLAYERS; i ++ )
-      {
-         m_player_types[i] = WM->getInfoHeteroPlayer( i );
-//       cout << i << ": " ;
-//       m_player_types[i].show( cout );
-      }
+	while( WM->getPlayMode() != PM_TIME_OVER  && bContLoop )
+	{
+		Log.log( 1, "in loop %d %d %f",
+				WM->getTimeLastSeeGlobalMessage().getTime(),
+				bSubstituted,
+				WM->isConfidenceGood( OBJECT_TEAMMATE_11 )) ;
+		if(  WM->waitForNewInformation() == false )
+		{
+			printf( "Shutting down coach\n" );
+			bContLoop = false;
+		}
+		else if( WM->getTimeLastSeeGlobalMessage().getTime() == 0 &&
+				bSubstituted == false &&
+				WM->isConfidenceGood( OBJECT_TEAMMATE_11 ))
+		{
+			// read (and write) all player_type information
+			for( int i = 0 ; i < MAX_HETERO_PLAYERS; i ++ )
+			{
+				m_player_types[i] = WM->getInfoHeteroPlayer( i );
+				//       cout << i << ": " ;
+				//       m_player_types[i].show( cout );
+			}
 
-      // just substitute some players (define your own methods to
-      // determine which player types should be substituted )
+			// just substitute some players (define your own methods to
+			// determine which player types should be substituted )
+			substitutePlayer(  2, 1 );  // substitute player 2 to type 1
+			substitutePlayer(  3, 2 );
+			substitutePlayer(  4, 3 );
+			substitutePlayer(  5, 4 );
+			substitutePlayer(  6, 5 );
+			substitutePlayer(  7, 6 );
+			substitutePlayer(  8, 7 );
+			substitutePlayer(  9, 8 );
+			substitutePlayer( 10, 9 );
+			substitutePlayer( 11, 10 );
+			bSubstituted = true;
+		}
 
-      substitutePlayer(  2, 1 );  // substitute player 2 to type 1
-      substitutePlayer(  3, 2 );
-      substitutePlayer(  4, 3 );
-      substitutePlayer(  5, 4 );
-      substitutePlayer(  6, 5 );
-      substitutePlayer(  7, 6 );
-      substitutePlayer(  8, 7 );
-      substitutePlayer(  9, 8 );
-      substitutePlayer( 10, 9 );
-      substitutePlayer( 11, 10 );
+		if( Log.isInLogLevel(  456 ) )
+			WM->logObjectInformation( 456, OBJECT_ILLEGAL);
+		if( SS->getSynchMode() == true )
+			ACT->sendMessageDirect( "(done)" );
+	}
 
-      bSubstituted = true;
-    }
-  
-    if( Log.isInLogLevel(  456 ) )
-      WM->logObjectInformation( 456, OBJECT_ILLEGAL);
-    if( SS->getSynchMode() == true )
-      ACT->sendMessageDirect( "(done)" );
-  }
-
-  return;
+	return;
 }
 
 
@@ -161,11 +159,11 @@ void BasicCoach::mainLoopNormal( )
     this command (using the ActHandler) to the soccer server. */
 void BasicCoach::substitutePlayer( int iPlayer, int iPlayerType )
 {
-  SoccerCommand soc;
-  soc.makeCommand( CMD_CHANGEPLAYER, (double)iPlayer, (double)iPlayerType );
-  ACT->sendCommandDirect( soc );
-  cerr << "coachmsg: changed player " << iPlayer << " to type " << iPlayerType
-       << endl;
+	SoccerCommand soc;
+	soc.makeCommand( CMD_CHANGEPLAYER, (double)iPlayer, (double)iPlayerType );
+	ACT->sendCommandDirect( soc );
+	cerr << "coachmsg: changed player " << iPlayer << " to type " << iPlayerType
+			<< endl;
 }
 
 
@@ -175,10 +173,10 @@ DWORD WINAPI stdin_callback( LPVOID v )
 void* stdin_callback( void * v )
 #endif
 {
-  Log.log( 1, "Starting to listen for user input" );
-  BasicCoach* bc = (BasicCoach*)v;
-  bc->handleStdin();
-  return NULL;
+	Log.log( 1, "Starting to listen for user input" );
+	BasicCoach* bc = (BasicCoach*)v;
+	bc->handleStdin();
+	return NULL;
 }
 
 /*!This method listens for input from the keyboard and when it receives this
@@ -194,18 +192,18 @@ void* stdin_callback( void * v )
    is played! */
 void BasicCoach::handleStdin( )
 {
-  char buf[MAX_MSG];
+	char buf[MAX_MSG];
 
-  while( bContLoop )
-  {
+	while( bContLoop )
+	{
 #ifdef WIN32
-    cin.getline( buf, MAX_MSG );
+		cin.getline( buf, MAX_MSG );
 #else
-    fgets( buf, MAX_MSG, stdin ); // does unblock with signal !!!!!
+		fgets( buf, MAX_MSG, stdin ); // does unblock with signal !!!!!
 #endif
-    printf( "after fgets: %s\n", buf );
-    executeStringCommand( buf );
-  }
+		printf( "after fgets: %s\n", buf );
+		executeStringCommand( buf );
+	}
 }
 
 /*!This method prints the possible commands that can be entered by the user.
@@ -215,9 +213,9 @@ void BasicCoach::handleStdin( )
    \param out output stream to which the possible commands are printed */
 void BasicCoach::showStringCommands( ostream& out )
 {
-  out << "Basic commands:"                                << endl <<
-         " m(ove) player_nr x y"                          << endl <<
-         " q(uit)"                                        << endl;
+	out << "Basic commands:"                                << endl <<
+			" m(ove) player_nr x y"                          << endl <<
+			" q(uit)"                                        << endl;
 }
 
 /*!This method executes the command that is entered by the user. For the
@@ -226,21 +224,21 @@ void BasicCoach::showStringCommands( ostream& out )
    \return true when command could be executed, false otherwise */
 bool BasicCoach::executeStringCommand( char *str)
 {
-  switch( str[0] )
-  {
-    case 'm':                               // move
-      sprintf( str, "(move %d %f %f)", Parse::parseFirstInt( &str ),
-                                       Parse::parseFirstDouble( &str ),
-                                       Parse::parseFirstDouble( &str ) );
-      break;
-    case 'q':                             // quit
-      bContLoop = false;
-      return true;
-    default:                             // default: send entered string
-      ;
-  }
-  printf( "send: %s\n", str );
-  ACT->sendMessage( str );
-  return true;
+	switch( str[0] )
+	{
+	case 'm':                               // move
+		sprintf( str, "(move %d %f %f)", Parse::parseFirstInt( &str ),
+				Parse::parseFirstDouble( &str ),
+				Parse::parseFirstDouble( &str ) );
+		break;
+	case 'q':                             // quit
+		bContLoop = false;
+		return true;
+	default:                             // default: send entered string
+		;
+	}
+	printf( "send: %s\n", str );
+	ACT->sendMessage( str );
+	return true;
 }
 

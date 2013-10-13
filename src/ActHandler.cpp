@@ -140,8 +140,7 @@ bool ActHandler::sendCommands( )
   if( bReturn == false )
 	if( WM->getPlayerNumber() == 8 )
     cerr << WM->getCurrentCycle() << ", " <<  WM->getPlayerNumber() << " " 
-         << "Acthandler::failed to create primary command string" << WM->acaoWM
-		 << WM->AR_getBallRelDistance() <<endl;
+         << "Acthandler::failed to create primary command string" << WM->acaoWM <<endl;
 
   if( strCommand[0] == '\0' )
   {

@@ -26,7 +26,7 @@ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
 CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*/
+ */
 
 /*! \file PlayerTeams.cpp
 <pre>
@@ -43,7 +43,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 <b>Date</b>             <b>Author</b>          <b>Comment</b>
 10/12/2000        Jelle Kok       Initial version created
 </pre>
-*/
+ */
 
 #include "Player.h"
 #include "BasicPlayer.h"
@@ -64,10 +64,15 @@ SoccerCommand Player::deMeer5(  )
 
 	/***************************** Inicializacoes *********************************/
 	MA->AtualizaNumero(WM->getPlayerNumber());
+	//cerr << WM->getPlayerNumber() << ": Carregando matriz estados\n";
 	MA->InicializaMatrizEstados();
+	//cerr << WM->getPlayerNumber() << ": Carregando matriz R\n";
 	MA->InicializaMatrizR();
+	//cerr << WM->getPlayerNumber() << ": Carregando matriz Q\n";
 	MA->InicializaMatrizQ();
+	//cerr << WM->getPlayerNumber() << ": Carregando matriz T\n";
 	MA->InicializaMatrizT();
+	//cerr << WM->getPlayerNumber() << ": Todas matrizes iniciadas\n";
 
 	MA->AtualizaNumJogo( AR->Partida_cont ) ;
 	SoccerCommand soc(CMD_ILLEGAL);
@@ -87,19 +92,20 @@ SoccerCommand Player::deMeer5(  )
 		possession = 1;
 	else possession = 0;
 
+	player = WM->getPlayerNumber();
+		p = player - 2 ;
+	bool kickable = WM->isBallKickable();
+
 	// Construção do vetor de estado
 	estado[0] = WM->AR_getAgentPos();
 	estado[1] = WM->AR_getBallPos();
 	estado[2] = possession;
-	estado[3] = WM->AR_getBallRelDistance();
+	estado[3] = WM->AR_getBallRelDistance( player, kickable );
 	estado[4] = WM->AR_getCloTeammateRelDist();
 	estado[5] = WM->AR_getCloOpponentRelDist();
 	estado[6] = WM->AR_getRelativeOppAng();
 	estado[7] = WM->AR_getAgentGloBodyAngle();
 	estado[8] = WM->AR_getAngleChavei5();
-
-	player = WM->getPlayerNumber();
-	p = player - 2 ;
 
 	/********************* Básico para iniciar o jogo *****************************/
 	if( WM->isBeforeKickOff( ) )
@@ -115,7 +121,7 @@ SoccerCommand Player::deMeer5(  )
 		if( WM->isKickOffUs( ) && WM->getPlayerNumber() == 10 ) // 10 takes kick
 		{
 			AR->CA_possession = 1; // Agente começa com a bola
-			if( WM->isBallKickable() )
+			if( kickable )
 			{
 				soc = AR_directPassNormal() ;
 				Log.log( 100, "take kick off" );
@@ -133,9 +139,9 @@ SoccerCommand Player::deMeer5(  )
 	else if( ( WM->isFreeKickUs() == true || WM->isGoalKickUs() == true ) && WM->isBallInOwnPenaltyArea() == true )
 	{
 		if(WM->getPlayerNumber() == 10)
-		{	  AR->CA_possession = 0; // Eles começam com a bola
+			AR->CA_possession = 0; // Eles começam com a bola
+
 		MA->InsereVetorA( 9, 0 );
-		}
 		soc = moveToPos(WM->getStrategicPosition(),
 				PS->getPlayerWhenToTurnAngle());
 		ACT->putCommandInQueue( soc );
@@ -182,10 +188,8 @@ SoccerCommand Player::deMeer5(  )
 				AR->ultNo( AR->chainAction[p] )->CA_estadoFinal = AR->s_new; // p = player - 2 (referente a posicao no vetor. Ex: Num. 2 -> p = 0 (min); Num. 11 -> p = 9 (max)
 				if( possession != AR->CA_possession && AR->CA_numActions > 1)
 				{
-					cerr << "1.0" << endl;
 					if( AR->CA_possession == 1 ) // Perdemos a bola
 					{
-						cerr << "2.0" << endl;
 						AR->CA_possession = 0;
 						reforco = 27*log(actNum) - 15; // Colocando fora do looping é possivel conceder um reforco diferenciado a ultima acao
 
@@ -202,7 +206,6 @@ SoccerCommand Player::deMeer5(  )
 
 						while( AR->ultNo( AR->chainAction[player] )->pointer != NULL )
 						{
-							cerr << "3.0" << endl;
 							AR->atualiza_ultNo( AR->chainAction, player ); // Apos deletar o ultimo nó é preciso atualizar o vetor dos ultimos nós
 
 							actNum++;
@@ -269,7 +272,6 @@ SoccerCommand Player::deMeer5(  )
 					}
 					else // bola recuperada
 					{
-						cerr << "4.0" << endl;
 						AR->CA_possession = 1;
 						reforco = 2*exp(actNum/2) + 20;
 
@@ -281,17 +283,10 @@ SoccerCommand Player::deMeer5(  )
 								AR->ultimoNo[p]->CA_estadoAcao,
 								AR->ultimoNo[p]->CA_acao );
 
-						if(AR->ultNo( AR->chainAction[player] ) != NULL)	if(AR->ultNo( AR->chainAction[player] ) != NULL)
-						{
-							cerr << "Entrei no if";
-							AR->delNoUlt( AR->chainAction, player);
-						}
-						else
-							cerr << "Fallied to delete";
+						AR->delNoUlt( AR->chainAction, player);
 
 						while( AR->ultNo( AR->chainAction[player] )->pointer != NULL )
 						{
-							cerr << "5.0" << endl;
 							AR->atualiza_ultNo( AR->chainAction, player );
 
 							actNum++;
@@ -377,204 +372,209 @@ SoccerCommand Player::deMeer5(  )
 
 			//reforço da posse de bola
 			if( e_new[2] == 1 ) reforco += 5;
-	  		else reforco += -10;
+			else reforco += -10;
 
-	  		//reforço da Distancia da bola
-	  		if( e[3] > 0 && e_new[3] == 0 ) reforco += 10;
-	  		if( e[3] == 0 && e_new[3] > 0 ) reforco += -20;
+			//reforço da Distancia da bola
+			if( e[3] > 0 && e_new[3] == 0 ) reforco += 10;
+			if( e[3] == 0 && e_new[3] > 0 ) reforco += -20;
 
-	  		//reforço da distancia ao aliado e oponente mais proximo
-	  		if( e_new[4] == 0 || e_new[5] == 0 ) reforco += -5;
+			//reforço da distancia ao aliado e oponente mais proximo
+			if( e_new[4] == 0 || e_new[5] == 0 ) reforco += -5;
 
-	  		//reforço do angulo ao oponente
-	  		if( e_new[6] == 3 ) reforco += 5;
+			//reforço do angulo ao oponente
+			if( e_new[6] == 3 ) reforco += 5;
 
-	  		//reforço do angulo do agente
-	  		if( e_new[7] == 2 ) reforco += -5;
-	  		else reforco += 5;
-
-
-	  		MA->InsereReforco( AR->acao, AR->s, reforco);
+			//reforço do angulo do agente
+			if( e_new[7] == 2 ) reforco += -5;
+			else reforco += 5;
 
 
-	  		/*************************** Atualiza Matriz Q ********************************/
-
-	  		r = MA->RetornaReforco( AR->acao, AR->s );
+			MA->InsereReforco( AR->acao, AR->s, reforco);
 
 
-	  		delta = r + desconto*MA->RetornaMaxQ(AR->s_new) ;
-	  		//Coeficiente de decaimento ajustado para
-	  		// 1/((ln iteracao)/10000)
-	  		coef1 = ((1/(log((AR->Iteracao_cont/24000.0) + 2.72))));
-	  		coef2 = (-1)*WM->getGoalDiff( )/5.0 ;
-	  		if( coef2 < 0.0 ) coef2 = 0.0 ;
-	  		//if( coef1 < coef2 ) coef1 = coef2 ;
-	  		coef1 = coef1 + coef2 ;
-	  		if( coef1 > 1 ) coef1 = 1 ;
-	  		dQ = coef1*delta ;
+			/*************************** Atualiza Matriz Q ********************************/
 
-	  		MA->InsereMatrizQ( AR->acao, AR->s, (1-coef1)*MA->RetornaValorQ(AR->acao, AR->s) + dQ ) ;
-	  		// (1-coef1)*Q(s,a) + coef1*(reforco + desconto*maxQ(s:))
-	  		MA->InsereTransicao( AR->acao, AR->s, AR->s_new ) ;
-	  		AR->Iteracao_cont++ ;
-
-	  		/******************************************************************************/
-
-	  		AR->dir_bola2 = AR->dir_bola ;
-	  		AR->vel_bola2 = AR->vel_bola ;
-	  	}
+			r = MA->RetornaReforco( AR->acao, AR->s );
 
 
+			delta = r + desconto*MA->RetornaMaxQ(AR->s_new) ;
+			//Coeficiente de decaimento ajustado para
+			// 1/((ln iteracao)/10000)
+			coef1 = ((1/(log((AR->Iteracao_cont/24000.0) + 2.72))));
+			coef2 = (-1)*WM->getGoalDiff( )/5.0 ;
+			if( coef2 < 0.0 ) coef2 = 0.0 ;
+			//if( coef1 < coef2 ) coef1 = coef2 ;
+			coef1 = coef1 + coef2 ;
+			if( coef1 > 1 ) coef1 = 1 ;
+			dQ = coef1*delta ;
+
+			MA->InsereMatrizQ( AR->acao, AR->s, (1-coef1)*MA->RetornaValorQ(AR->acao, AR->s) + dQ ) ;
+			// (1-coef1)*Q(s,a) + coef1*(reforco + desconto*maxQ(s:))
+			MA->InsereTransicao( AR->acao, AR->s, AR->s_new ) ;
+			AR->Iteracao_cont++ ;
+
+			/******************************************************************************/
+
+			AR->dir_bola2 = AR->dir_bola ;
+			AR->vel_bola2 = AR->vel_bola ;
+		}
 
 
-	  	/****************************** Escolha Ação **********************************/
 
 
-	  	MA->verAcao = 5 ;
+		/****************************** Escolha Ação **********************************/
 
-	  	AR->ultNo( AR->chainAction[p] )->CA_estadoFinal = AR->s;
-	  	AR->s = AR->s_new;
 
-	  	AR->addNo_Ultimo( AR->chainAction, player );
+		MA->verAcao = 5 ;
 
-	  	srand(WM->getPlayerNumber()*rand());
-	  	prob = (rand()%1000001)/1000000.00;
+		AR->ultNo( AR->chainAction[p] )->CA_estadoFinal = AR->s;
+		AR->s = AR->s_new;
 
-	  	bool randAction = false;
+		AR->addNo_Ultimo( AR->chainAction, player );
 
-	  	if( prob < (1.00 - (1.00/log((AR->Iteracao_cont/24000) + 2.72 ))))
-	  	{
-	  		//cerr << "Acao Otima";
-	  		AR->acao = MA->RetornaAcaoOtima(AR->s, estado[3]) ;
-	  		//cerr << acao << '\n';
-	  		//if( WM->getPlayerNumber() == 9 ) cerr << "Soh tah entrando aqui" << AR->acao << '\n';
-	  		/*if((AR->acao >= 0 && AR->acao <= 8) && estado[3] != 0)
+		srand(WM->getPlayerNumber()*rand());
+		prob = (rand()%1000001)/1000000.00;
+
+		bool randAction = false;
+
+		if( prob < (1.00 - (1.00/log((AR->Iteracao_cont/24000) + 2.72 ))))
+		{
+			//cerr << "Acao Otima";
+			AR->acao = MA->RetornaAcaoOtima(AR->s, estado[3]) ;
+			//cerr << acao << '\n';
+			//if( WM->getPlayerNumber() == 9 ) cerr << "Soh tah entrando aqui" << AR->acao << '\n';
+			/*if((AR->acao >= 0 && AR->acao <= 8) && estado[3] != 0)
 	  		{
 	  			cerr << "Tentei chutar mas nao consegui\n";
 	  			randAction = true;
 	  		}*/
-	  	}
-	  	else
-	  		randAction = true;
+		}
+		else
+			randAction = true;
+		soc = intercept (false);
+		MA->InsereVetorA( 9, 5 );
 
-	  	if(randAction == true)
-	  	{
-	  		//if( WM->getPlayerNumber() == 9 ) cerr << "Tah aqui tbm" << AR->acao << '\n';
-	  		//cerr << "Acao Aleatoria";
+		if(randAction == true)
+		{
+			//if( WM->getPlayerNumber() == 9 ) cerr << "Tah aqui tbm" << AR->acao << '\n';
+			//cerr << "Acao Aleatoria";
 
-	  		if( estado[3] == 0 )
-	  		{
-	  			AR->acao = rand()%9;
-	  		}
-	  		else
-	  		{
-	  			prob = rand()%4;
-	  			if( prob == 0 ) AR->acao = 9;
-	  			else if( prob == 1 ) AR->acao = 10;
-	  			else if( prob == 2 ) AR->acao = 11;
-	  			else if( prob == 3 ) AR->acao = 12;
-	  		}
-	  	}
+			if( estado[3] == 0 )
+			{
+				AR->acao = rand()%9;
+			}
+			else
+			{
+				prob = rand()%4;
+				if( prob == 0 ) AR->acao = 9;
+				else if( prob == 1 ) AR->acao = 10;
+				else if( prob == 2 ) AR->acao = 11;
+				else if( prob == 3 ) AR->acao = 12;
+			}
+		}
 
-	  	AR->AdicionaContA( AR->acao ) ;
-	  	WM->acaoWM == AR->acao;
+		AR->AdicionaContA( AR->acao ) ;
+		WM->acaoWM == AR->acao;
 
-	  	AR->ultNo(AR->chainAction[p])->CA_acao = AR->acao;
-	  	AR->ultNo(AR->chainAction[p])->CA_estadoAcao = AR->s_new;
-	  	AR->ultNo(AR->chainAction[p])->CA_estadoFinal = -1;
-	  	AR->CA_numActions++;
+		AR->ultNo(AR->chainAction[p])->CA_acao = AR->acao;
+		AR->ultNo(AR->chainAction[p])->CA_estadoAcao = AR->s_new;
+		AR->ultNo(AR->chainAction[p])->CA_estadoFinal = -1;
+		AR->CA_numActions++;
 
-	  	/************************** Conversão em Comando ******************************/
+		/************************** Conversão em Comando ******************************/
 
-	  	int infor = AR->acao;
-	  	switch( AR->acao )
-	  	{
-	  	case 0:
-	  		soc = AR_SafeDribble ();
-	  		break;
-	  	case 1:
-	  		soc = AR_FastDribble ();
-	  		break;
-	  	case 2:
-	  		soc = AR_SafeDribblePlus30 ();
-	  		break;
-	  	case 3:
-	  		soc = AR_SafeDribbleMinus30 ();
-	  		break;
-	  	case 4:
-	  		soc = AR_SafeDribblePlus90 ();
-	  		break;
-	  	case 5:
-	  		soc = AR_SafeDribbleMinus90 ();
-	  		break;
-	  	case 6:
-	  		soc = AR_directPassNormal ();
-	  		break;
-	  	case 7:
-	  		soc = AR_directShootGoal ();
-	  		break;
-	  	case 8:
-	  		soc = freezeBall( );
-	  		break;
-	  	case 9:
-	  		soc = intercept (false);
-	  		MA->InsereVetorA( 9, 5 );
-	  		break;
-	  	case 10:
-	  		soc = AR_markOppAndBall ();
-	  		//if( soc == CMD_ILLEGAL ) soc = intercept (false);
-	  		break;
-	  	case 11:
-	  		soc = turnBodyToObject( OBJECT_BALL ) ;//AR_markOppAndGoal ();
-	  		//if( soc == CMD_ILLEGAL ) soc = AR_moveToStrategicPos ();
-	  		break;
-	  	case 12:
-	  		soc = moveToPos(WM->getStrategicPosition(),
-	  				PS->getPlayerWhenToTurnAngle());
-	  		break;
-	  		//Ação Padrão é interceptar a bola se estiver sem a bola e
-	  		//isolar a bola se estiver com ela.
-	  	default:
-	  		if( estado[3] == 0 ) soc = clearBall( CLEAR_BALL_DEFENSIVE );
-	  		else soc = intercept (false);
-	  		break;
-	  	}
+		int infor = AR->acao;
+		switch( AR->acao )
+		{
+		case 0:
+			soc = AR_SafeDribble ();
+			break;
+		case 1:
+			soc = AR_FastDribble ();
+			break;
+		case 2:
+			soc = AR_SafeDribblePlus30 ();
+			break;
+		case 3:
+			soc = AR_SafeDribbleMinus30 ();
+			break;
+		case 4:
+			soc = AR_SafeDribblePlus90 ();
+			break;
+		case 5:
+			soc = AR_SafeDribbleMinus90 ();
+			break;
+		case 6:
+			soc = AR_directPassNormal ();
+			break;
+		case 7:
+			soc = AR_directShootGoal ();
+			break;
+		case 8:
+			soc = freezeBall( );
+			break;
+		case 9:
+			soc = intercept (false);
+			MA->InsereVetorA( 9, 5 );
+			break;
+		case 10:
+			soc = AR_markOppAndBall ();
+			//if( soc == CMD_ILLEGAL ) soc = intercept (false);
+			break;
+		case 11:
+			soc = turnBodyToObject( OBJECT_BALL ) ;//AR_markOppAndGoal ();
+			//if( soc == CMD_ILLEGAL ) soc = AR_moveToStrategicPos ();
+			break;
+		case 12:
+			soc = moveToPos(WM->getStrategicPosition(),
+					PS->getPlayerWhenToTurnAngle());
+			break;
+			//Ação Padrão é interceptar a bola se estiver sem a bola e
+			//isolar a bola se estiver com ela.
+		default:
+			if( estado[3] == 0 ) soc = clearBall( CLEAR_BALL_DEFENSIVE );
+			else soc = intercept (false);
+			break;
+		}
 
 
-	  	/********************* Inclusão da ação na fila de execução *******************/
+		/********************* Inclusão da ação na fila de execução *******************/
 
-	  	//Análise da stamina à parte da Aprendizagem e proteção contra ações
-	  	// indevidas como chutar a bola sem ter a posse.
-	  	if( soc.commandType == CMD_DASH &&             // if stamina low
-	  			WM->getAgentStamina().getStamina() <
-	  			SS->getRecoverDecThr()*SS->getStaminaMax()+200 )
-	  	{
-	  		soc.dPower = 30.0 * WM->getAgentStamina().getRecovery(); // dash slow
-	  		if( estado[3] == 0 )
-	  		{
-	  			if( AR->acao >= 0 && AR->acao <= 8 )
-	  				ACT->putCommandInQueue( soc );
-	  		}
-	  		else if( AR->acao >= 9 && AR->acao <= 12 )
-	  			ACT->putCommandInQueue( soc );
+		if( AR->acao >= 0 && AR->acao < 9 && !kickable )
+			printf("Impossivel executar chute!\n");
 
-	  	}
-	  	else                                           // if stamina high
-	  	{
-	  		if( estado[3] == 0 )
-	  		{
-	  			if( AR->acao >= 0 && AR->acao <= 8 )
-	  				ACT->putCommandInQueue( soc );
-	  		}
-	  		else if( AR->acao >= 9 && AR->acao <= 12 )
-	  			ACT->putCommandInQueue( soc );
-	  		// dash as intended
-	  	}
+		//Análise da stamina à parte da Aprendizagem e proteção contra ações
+		// indevidas como chutar a bola sem ter a posse.
+		if( soc.commandType == CMD_DASH &&             // if stamina low
+				WM->getAgentStamina().getStamina() <
+				SS->getRecoverDecThr()*SS->getStaminaMax()+200 )
+		{
+			soc.dPower = 30.0 * WM->getAgentStamina().getRecovery(); // dash slow
+			if( estado[3] == 0 )
+			{
+				if( AR->acao >= 0 && AR->acao <= 8 )
+					ACT->putCommandInQueue( soc );
+			}
+			else if( AR->acao >= 9 && AR->acao <= 12 )
+				ACT->putCommandInQueue( soc );
 
-	  	AR->ciclo_ant = AR->ciclo_atual ;
-  }
+		}
+		else                                           // if stamina high
+		{
+			if( estado[3] == 0 )
+			{
+				if( AR->acao >= 0 && AR->acao <= 8 )
+					ACT->putCommandInQueue( soc );
+			}
+			else if( AR->acao >= 9 && AR->acao <= 12 )
+				ACT->putCommandInQueue( soc );
+			// dash as intended
+		}
 
-  return soc;
+		AR->ciclo_ant = AR->ciclo_atual ;
+	}
+
+	return soc;
 }	
 
 
@@ -584,151 +584,151 @@ SoccerCommand Player::deMeer5(  )
    position on this rectangle where the ball intersects if you make a line
    between the ball position and the center of the goal. If the ball can
    be intercepted in the own penalty area the ball is intercepted and catched.
-*/
+ */
 SoccerCommand Player::deMeer5_goalie(  )
 {
-  int i;
+	int i;
 
-  SoccerCommand soc;
-  VecPosition   posAgent = WM->getAgentGlobalPosition();
-  AngDeg        angBody  = WM->getAgentGlobalBodyAngle();
+	SoccerCommand soc;
+	VecPosition   posAgent = WM->getAgentGlobalPosition();
+	AngDeg        angBody  = WM->getAgentGlobalBodyAngle();
 
-  // define the top and bottom position of a rectangle in which keeper moves
-  static const VecPosition posLeftTop( -PITCH_LENGTH/2.0 +
-               0.7*PENALTY_AREA_LENGTH, -PENALTY_AREA_WIDTH/4.0 );
-  static const VecPosition posRightTop( -PITCH_LENGTH/2.0 +
-               0.7*PENALTY_AREA_LENGTH, +PENALTY_AREA_WIDTH/4.0 );
+	// define the top and bottom position of a rectangle in which keeper moves
+	static const VecPosition posLeftTop( -PITCH_LENGTH/2.0 +
+			0.7*PENALTY_AREA_LENGTH, -PENALTY_AREA_WIDTH/4.0 );
+	static const VecPosition posRightTop( -PITCH_LENGTH/2.0 +
+			0.7*PENALTY_AREA_LENGTH, +PENALTY_AREA_WIDTH/4.0 );
 
-  // define the borders of this rectangle using the two points.
-  static Line  lineFront = Line::makeLineFromTwoPoints(posLeftTop,posRightTop);
-  static Line  lineLeft  = Line::makeLineFromTwoPoints(
-                         VecPosition( -50.0, posLeftTop.getY()), posLeftTop );
-  static Line  lineRight = Line::makeLineFromTwoPoints(
-                         VecPosition( -50.0, posRightTop.getY()),posRightTop );
+	// define the borders of this rectangle using the two points.
+	static Line  lineFront = Line::makeLineFromTwoPoints(posLeftTop,posRightTop);
+	static Line  lineLeft  = Line::makeLineFromTwoPoints(
+			VecPosition( -50.0, posLeftTop.getY()), posLeftTop );
+	static Line  lineRight = Line::makeLineFromTwoPoints(
+			VecPosition( -50.0, posRightTop.getY()),posRightTop );
 
 
-  if( WM->isBeforeKickOff( ) )
-  {
-    if( formations->getFormation() != FT_INITIAL || // not in kickoff formation
-        posAgent.getDistanceTo( WM->getStrategicPosition() ) > 2.0 )  
-    {
-      formations->setFormation( FT_INITIAL );       // go to kick_off formation
-      ACT->putCommandInQueue( soc=teleportToPos(WM->getStrategicPosition()) );
-    }
-    else                                            // else turn to center
-    {
-      ACT->putCommandInQueue( soc = turnBodyToPoint( VecPosition( 0, 0 ), 0 ));
-      ACT->putCommandInQueue( alignNeckWithBody( ) );
-    }
-    return soc;
-  }
+	if( WM->isBeforeKickOff( ) )
+	{
+		if( formations->getFormation() != FT_INITIAL || // not in kickoff formation
+				posAgent.getDistanceTo( WM->getStrategicPosition() ) > 2.0 )
+		{
+			formations->setFormation( FT_INITIAL );       // go to kick_off formation
+			ACT->putCommandInQueue( soc=teleportToPos(WM->getStrategicPosition()) );
+		}
+		else                                            // else turn to center
+		{
+			ACT->putCommandInQueue( soc = turnBodyToPoint( VecPosition( 0, 0 ), 0 ));
+			ACT->putCommandInQueue( alignNeckWithBody( ) );
+		}
+		return soc;
+	}
 
-  if( WM->getConfidence( OBJECT_BALL ) < PS->getBallConfThr() )
-  {                                                // confidence ball too  low
-    ACT->putCommandInQueue( searchBall() );        // search ball
-    ACT->putCommandInQueue( alignNeckWithBody( ) );
-  }
-  else if( WM->getPlayMode() == PM_PLAY_ON || WM->isFreeKickThem() ||
-           WM->isCornerKickThem() )               
-  {
-    if( WM->isBallCatchable() )
-    {
-      ACT->putCommandInQueue( soc = catchBall() );
-      ACT->putCommandInQueue( turnNeckToObject( OBJECT_BALL, soc ) );
-    }
-     else if( WM->isBallKickable() )
-    {
-       soc = kickTo( VecPosition(0,posAgent.getY()*2.0), 2.0 );
-       ACT->putCommandInQueue( soc );
-       ACT->putCommandInQueue( turnNeckToObject( OBJECT_BALL, soc ) );
-    }
-    else if( WM->isInOwnPenaltyArea( getInterceptionPointBall( &i, true ) ) &&
-             WM->getFastestInSetTo( OBJECT_SET_PLAYERS, OBJECT_BALL, &i ) == 
-                                               WM->getAgentObjectType() )
-    {
-      ACT->putCommandInQueue( soc = intercept( true ) );
-      ACT->putCommandInQueue( turnNeckToObject( OBJECT_BALL, soc ) );
-    }
-    else
-    {
-      // make line between own goal and the ball
-      VecPosition posMyGoal = ( WM->getSide() == SIDE_LEFT )
-             ? SoccerTypes::getGlobalPositionFlag(OBJECT_GOAL_L, SIDE_LEFT )
-             : SoccerTypes::getGlobalPositionFlag(OBJECT_GOAL_R, SIDE_RIGHT);
-      Line lineBall = Line::makeLineFromTwoPoints( WM->getBallPos(),posMyGoal);
+	if( WM->getConfidence( OBJECT_BALL ) < PS->getBallConfThr() )
+	{                                                // confidence ball too  low
+		ACT->putCommandInQueue( searchBall() );        // search ball
+		ACT->putCommandInQueue( alignNeckWithBody( ) );
+	}
+	else if( WM->getPlayMode() == PM_PLAY_ON || WM->isFreeKickThem() ||
+			WM->isCornerKickThem() )
+	{
+		if( WM->isBallCatchable() )
+		{
+			ACT->putCommandInQueue( soc = catchBall() );
+			ACT->putCommandInQueue( turnNeckToObject( OBJECT_BALL, soc ) );
+		}
+		else if( WM->isBallKickable() )
+		{
+			soc = kickTo( VecPosition(0,posAgent.getY()*2.0), 2.0 );
+			ACT->putCommandInQueue( soc );
+			ACT->putCommandInQueue( turnNeckToObject( OBJECT_BALL, soc ) );
+		}
+		else if( WM->isInOwnPenaltyArea( getInterceptionPointBall( &i, true ) ) &&
+				WM->getFastestInSetTo( OBJECT_SET_PLAYERS, OBJECT_BALL, &i ) ==
+						WM->getAgentObjectType() )
+		{
+			ACT->putCommandInQueue( soc = intercept( true ) );
+			ACT->putCommandInQueue( turnNeckToObject( OBJECT_BALL, soc ) );
+		}
+		else
+		{
+			// make line between own goal and the ball
+			VecPosition posMyGoal = ( WM->getSide() == SIDE_LEFT )
+            		 ? SoccerTypes::getGlobalPositionFlag(OBJECT_GOAL_L, SIDE_LEFT )
+			: SoccerTypes::getGlobalPositionFlag(OBJECT_GOAL_R, SIDE_RIGHT);
+			Line lineBall = Line::makeLineFromTwoPoints( WM->getBallPos(),posMyGoal);
 
-      // determine where your front line intersects with the line from ball
-      VecPosition posIntersect = lineFront.getIntersection( lineBall );
+			// determine where your front line intersects with the line from ball
+			VecPosition posIntersect = lineFront.getIntersection( lineBall );
 
-      // outside rectangle, use line at side to get intersection
-      if (posIntersect.isRightOf( posRightTop ) )
-        posIntersect = lineRight.getIntersection( lineBall );
-      else if (posIntersect.isLeftOf( posLeftTop )  )
-        posIntersect = lineLeft.getIntersection( lineBall );
+			// outside rectangle, use line at side to get intersection
+			if (posIntersect.isRightOf( posRightTop ) )
+				posIntersect = lineRight.getIntersection( lineBall );
+			else if (posIntersect.isLeftOf( posLeftTop )  )
+				posIntersect = lineLeft.getIntersection( lineBall );
 
-      if( posIntersect.getX() < -49.0 )
-        posIntersect.setX( -49.0 );
-        
-      // and move to this position
-      if( posIntersect.getDistanceTo( WM->getAgentGlobalPosition() ) > 0.5 )
-      {
-        soc = moveToPos( posIntersect, PS->getPlayerWhenToTurnAngle() );
-        ACT->putCommandInQueue( soc );
-        ACT->putCommandInQueue( turnNeckToObject( OBJECT_BALL, soc ) );
-      }
-      else
-      {
-        ACT->putCommandInQueue( soc = turnBodyToObject( OBJECT_BALL ) );
-        ACT->putCommandInQueue( turnNeckToObject( OBJECT_BALL, soc ) );
-      }
-    }
-  }
-  else if( WM->isFreeKickUs() == true || WM->isGoalKickUs() == true )
-  {
-    if( WM->isBallKickable() )
-    {
-      if( WM->getTimeSinceLastCatch() == 25 && WM->isFreeKickUs() )
-      {
-        // move to position with lesser opponents.
-        if( WM->getNrInSetInCircle( OBJECT_SET_OPPONENTS, 
-                                          Circle(posRightTop, 15.0 )) <
-            WM->getNrInSetInCircle( OBJECT_SET_OPPONENTS, 
-                                           Circle(posLeftTop,  15.0 )) )
-          soc.makeCommand( CMD_MOVE,posRightTop.getX(),posRightTop.getY(),0.0);
-        else
-          soc.makeCommand( CMD_MOVE,posLeftTop.getX(), posLeftTop.getY(), 0.0);
-        ACT->putCommandInQueue( soc );
-      }
-      else if( WM->getTimeSinceLastCatch() > 28 )
-      {
-        soc = clearBall(CLEAR_BALL_DEFENSIVE) ; //kickTo( VecPosition(0,posAgent.getY()*2.0), 2.0 );
-        ACT->putCommandInQueue( soc );
-      }
-      else if( WM->getTimeSinceLastCatch() < 25 )
-      {
-        VecPosition posSide( 0.0, posAgent.getY() ); 
-        if( fabs( (posSide - posAgent).getDirection() - angBody) > 10 )
-        {
-          soc = turnBodyToPoint( posSide );
-          ACT->putCommandInQueue( soc );
-        }
-        ACT->putCommandInQueue( turnNeckToObject( OBJECT_BALL, soc ) );
-      }
-    }
-    else if( WM->isGoalKickUs()  )
-    {
-      ACT->putCommandInQueue( soc = intercept( true ) );
-      ACT->putCommandInQueue( turnNeckToObject( OBJECT_BALL, soc ) );
-    }
-    else
-      ACT->putCommandInQueue( turnNeckToObject( OBJECT_BALL, soc ) );
-  }
-  else
-  {
-     ACT->putCommandInQueue( soc = turnBodyToObject( OBJECT_BALL ) );
-     ACT->putCommandInQueue( turnNeckToObject( OBJECT_BALL, soc ) );
-  }
-  return soc;
+			if( posIntersect.getX() < -49.0 )
+				posIntersect.setX( -49.0 );
+
+			// and move to this position
+			if( posIntersect.getDistanceTo( WM->getAgentGlobalPosition() ) > 0.5 )
+			{
+				soc = moveToPos( posIntersect, PS->getPlayerWhenToTurnAngle() );
+				ACT->putCommandInQueue( soc );
+				ACT->putCommandInQueue( turnNeckToObject( OBJECT_BALL, soc ) );
+			}
+			else
+			{
+				ACT->putCommandInQueue( soc = turnBodyToObject( OBJECT_BALL ) );
+				ACT->putCommandInQueue( turnNeckToObject( OBJECT_BALL, soc ) );
+			}
+		}
+	}
+	else if( WM->isFreeKickUs() == true || WM->isGoalKickUs() == true )
+	{
+		if( WM->isBallKickable() )
+		{
+			if( WM->getTimeSinceLastCatch() == 25 && WM->isFreeKickUs() )
+			{
+				// move to position with lesser opponents.
+				if( WM->getNrInSetInCircle( OBJECT_SET_OPPONENTS,
+						Circle(posRightTop, 15.0 )) <
+						WM->getNrInSetInCircle( OBJECT_SET_OPPONENTS,
+								Circle(posLeftTop,  15.0 )) )
+					soc.makeCommand( CMD_MOVE,posRightTop.getX(),posRightTop.getY(),0.0);
+				else
+					soc.makeCommand( CMD_MOVE,posLeftTop.getX(), posLeftTop.getY(), 0.0);
+				ACT->putCommandInQueue( soc );
+			}
+			else if( WM->getTimeSinceLastCatch() > 28 )
+			{
+				soc = clearBall(CLEAR_BALL_DEFENSIVE) ; //kickTo( VecPosition(0,posAgent.getY()*2.0), 2.0 );
+				ACT->putCommandInQueue( soc );
+			}
+			else if( WM->getTimeSinceLastCatch() < 25 )
+			{
+				VecPosition posSide( 0.0, posAgent.getY() );
+				if( fabs( (posSide - posAgent).getDirection() - angBody) > 10 )
+				{
+					soc = turnBodyToPoint( posSide );
+					ACT->putCommandInQueue( soc );
+				}
+				ACT->putCommandInQueue( turnNeckToObject( OBJECT_BALL, soc ) );
+			}
+		}
+		else if( WM->isGoalKickUs()  )
+		{
+			ACT->putCommandInQueue( soc = intercept( true ) );
+			ACT->putCommandInQueue( turnNeckToObject( OBJECT_BALL, soc ) );
+		}
+		else
+			ACT->putCommandInQueue( turnNeckToObject( OBJECT_BALL, soc ) );
+	}
+	else
+	{
+		ACT->putCommandInQueue( soc = turnBodyToObject( OBJECT_BALL ) );
+		ACT->putCommandInQueue( turnNeckToObject( OBJECT_BALL, soc ) );
+	}
+	return soc;
 }
 
 
@@ -736,7 +736,7 @@ SoccerCommand Player::deMeer5_goalie(  )
     {
       if( WM->isBallKickable() )
       {
-      
+
 	    soc = AR_directPassNormal() ;
         Log.log( 100, "take kick off" );        
       }
@@ -772,11 +772,11 @@ SoccerCommand Player::deMeer5_goalie(  )
     }
     else if( WM->isBallKickable())                    // if kickable
     {
-		
-	  
+
+
 	  soc = AR_directPassNormal() ;
-	
-		
+
+
       ACT->putCommandInQueue( soc );
       ACT->putCommandInQueue( turnNeckToObject( OBJECT_BALL, soc ) );
       Log.log( 100, "kick ball" );
@@ -815,7 +815,7 @@ SoccerCommand Player::deMeer5_goalie(  )
        }
        else                                        // else watch ball
        {
-           
+
          ACT->putCommandInQueue( soc = turnBodyToObject( OBJECT_BALL ) );
          ACT->putCommandInQueue( turnNeckAtualiza_MatrizQToObject( OBJECT_BALL, soc ) );
        }
@@ -828,8 +828,8 @@ SoccerCommand Player::deMeer5_goalie(  )
      else                                         // nothing to do
        ACT->putCommandInQueue( SoccerCommand(CMD_TURNNECK,0.0) );
    }
-  
-  
+
+
 /*	
        if ( !WM->isBeforeKickOff() && WM->AR_getBallRelDistance() == 0){
 			soc = AR_SafeDribble () ;
@@ -837,7 +837,7 @@ SoccerCommand Player::deMeer5_goalie(  )
 	   else if( WM->AR_getBallRelDistance() < 3 ){
 			soc = intercept (false) ;
             ACT->putCommandInQueue( soc ) ; }
-		
+
        else if( posAgent.getDistanceTo(WM->getStrategicPosition()) >
                   1.5 + fabs(posAgent.getX()-posBall.getX())/10.0)
                                                   // if not near strategic pos
@@ -856,15 +856,15 @@ SoccerCommand Player::deMeer5_goalie(  )
          ACT->putCommandInQueue( turnNeckToObject( OBJECT_BALL, soc ) );
        }
      }
-*/	
+ */
 
 /*	if( WM->getPlayerNumber() == 4 )
 	{
         int i5 = WM->AR_getAngleChavei5() ;
 		cerr << "Pele falando: A distancia do oponente: " << i5 << endl;
 	}
-		
-		
+
+
 
 
 			int i1 = WM->AR_getBallPos() ;
@@ -882,18 +882,18 @@ SoccerCommand Player::deMeer5_goalie(  )
 			cerr << "Pele falando: O Angulo entre eles e a bola: " << i5 << endl;
 			cerr << "Pele falando: O angulo do oponente: " << i6 << endl;
 			cerr << "Pele falando: O meu angulo: " << i7 << endl;
-		
+
 			cerr << "Pele falando: Isso e tudo pessoal" << endl;
 
-			
-		
+
+
 	}*/
 
 
 void Player::Atualiza_MatrizQ( int reforco, int estadoFinal, int estadoAcao, int acao)
 {
 	int r;
-  	double delta, dQ, desconto, coef1, coef2;
+	double delta, dQ, desconto, coef1, coef2;
 	r = MA->RetornaReforco( acao, estadoAcao );
 
 	delta = r + desconto*MA->RetornaMaxQ(estadoFinal) ;

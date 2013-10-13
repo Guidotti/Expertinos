@@ -376,7 +376,8 @@ public:
   VecPosition   getGlobalVelocity          ( ObjectT        o                );
   double        getRelativeDistance        ( ObjectT        o                );
   //AR_change 
-  int           AR_getBallRelDistance      (                                 );
+  int           AR_getBallRelDistance      ( int            PlayerNum        ,
+											 bool           kickable		 );
   int			AR_getBallPossession	   (                                 );
   int           AR_getCloTeammateRelDist   (                                 );
   int           AR_getCloOpponentRelDist   (                                 );
